@@ -4,7 +4,9 @@ const Footer = () => {
       <div className="flex flex-col gap-12">
         <img src="/footer-logo.png" alt="footer-logo" width={197} height={74} />
 
-        <p>All rights reserved © SNEP | Organisation</p>
+        <p className="font-metrophobic">
+          All rights reserved © SNEP | Organisation
+        </p>
       </div>
     </footer>
   );

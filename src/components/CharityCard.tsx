@@ -8,12 +8,12 @@ const CharityCard = () => {
       <div className=" px-2 py-3 flex flex-col justify-between h-[180px] ">
         <div className="flex flex-col gap-4 text-base">
           <h1 className="text-purple-900">Charity Name</h1>
-          <p className="text-zinc-500">
+          <p className="text-zinc-500 font-metrophobic">
             Helping children across kenya get clean water
           </p>
         </div>
 
-        <div className=" flex items-center justify-between text-xs text-zinc-500">
+        <div className=" flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
           <p>PROJECT UPDATE</p>
           <p>20 SEP 2023</p>
         </div>

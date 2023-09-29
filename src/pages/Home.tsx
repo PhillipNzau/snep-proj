@@ -23,8 +23,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="w-[60%] mx-auto text-zinc-400 self-start px-8">
-        <div className="flex items-center gap-4 mb-8">
+      <div className="w-[64%] mx-auto text-zinc-400 self-start px-8">
+        <div className="flex items-center gap-4 mb-8 font-metrophobic">
           <p>OVERVIEW</p>
           <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
         </div>
@@ -47,16 +47,16 @@ const Home = () => {
       </div>
 
       {/* CTA banner */}
-      <div className="bg-purple-900 w-full h-64 flex items-center justify-between">
-        <p>BECOME A CHARITY TODAY</p>
-        <button className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white ">
+      <div className="bg-purple-900 w-full h-64 px-[20%] flex items-center justify-between font-metrophobic">
+        <p className="w-[426px] text-white text-6xl ">BECOME A CHARITY TODAY</p>
+        <button className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200">
           BE A CHARITY
         </button>
       </div>
 
       {/* View Charities */}
-      <div className="w-[60%] mx-auto">
-        <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-8">
+      <div className="w-[64%] mx-auto">
+        <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-8 font-metrophobic">
           <p>CHARITIES</p>
           <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
         </div>
@@ -64,11 +64,10 @@ const Home = () => {
           <CharityCard />
           <CharityCard />
           <CharityCard />
-          <CharityCard />
-          <CharityCard />
-          <CharityCard />
-          <CharityCard />
-          <CharityCard />
+
+          <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+            View More
+          </button>
         </div>
       </div>
     </main>
