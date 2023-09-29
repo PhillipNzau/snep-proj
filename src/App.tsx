@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import "./App.css";
 import Navbar from "./components/Navbar";
