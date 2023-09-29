@@ -1,3 +1,5 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 import SEO from "../components/SEO";
 import CharityCard from "../components/CharityCard";
 
@@ -13,7 +15,12 @@ const Home = () => {
       {/* Hero section */}
       <section className="relative w-[535px] mb-20">
         <div className="">
-          <img src="/hero.png" alt="charity img" width={535} height={417} />
+          <LazyLoadImage
+            src="/hero.png"
+            alt="charity img"
+            width={535}
+            height={417}
+          />
         </div>
 
         <div className="absolute -bottom-16 -right-20 w-[402px] h-48 bg-indigo-900 bg-opacity-60 px-6 py-7 text-white">

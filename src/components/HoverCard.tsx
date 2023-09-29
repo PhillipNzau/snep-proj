@@ -1,12 +1,16 @@
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 const HoverCard = () => {
   return (
     <>
       {/* hover card effect */}
       <div className="relative flex items-center justify-center w-72 h-60 bg-gray-900 group hover:cursor-pointer">
-        <img
+        <LazyLoadImage
           className="absolute inset-0 object-cover  w-full h-full group-hover:opacity-50"
-          src="/public/charityImg.png"
+          src="/charityImg.png"
           alt="charity image"
+          width={288}
+          height={240}
         />
         <div className="relative p-5">
           <div className="">

@@ -15,7 +15,6 @@ const Charity = () => {
       <section className="relative w-[535px] mb-20">
         <div className="">
           <LazyLoadImage
-            effect="blur"
             src="/hero.png"
             alt="charity img"
             width={535}
