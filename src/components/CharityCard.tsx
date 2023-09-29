@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 const CharityCard = () => {
   const navigate = useNavigate();
   const handleOnClick = (id: any) => {
@@ -12,7 +14,12 @@ const CharityCard = () => {
       }}
     >
       <div>
-        <img src="/charityImg.png" alt="charity img" width={262} height={154} />
+        <LazyLoadImage
+          src="/charityImg.png"
+          alt="charity img"
+          width={262}
+          height={154}
+        />
       </div>
 
       <div className=" px-2 py-3 flex flex-col justify-between h-[180px] ">
