@@ -1,14 +1,12 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 
 interface Props {
   title: string;
   description: string;
-  name: string;
   type: string;
 }
 
-const SEO = ({ title, description, name, type }: Props) => {
+const SEO = ({ title, description, type }: Props) => {
   return (
     <Helmet>
       <title>{title}</title>

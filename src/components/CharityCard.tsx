@@ -1,5 +1,3 @@
-import React from "react";
-
 const CharityCard = () => {
   return (
     <div className="w-[262px] h-[338px]  mb-20 bg-white border border-zinc-300">

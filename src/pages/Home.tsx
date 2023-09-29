@@ -7,7 +7,6 @@ const Home = () => {
       <SEO
         title="Home page"
         description="Snep is a charity donation platform"
-        name="SNEP organisation"
         type="article"
       />
 
