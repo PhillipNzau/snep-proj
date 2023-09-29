@@ -5,12 +5,13 @@ const Home = () => {
   return (
     <main className="flex flex-col items-center gap-12 w-full">
       <SEO
-        title="Home page"
+        title="Snep Home"
         description="Snep is a charity donation platform"
         type="article"
       />
 
-      <div className="relative w-[535px] mb-20">
+      {/* Hero section */}
+      <section className="relative w-[535px] mb-20">
         <div className="">
           <img src="/hero.png" alt="charity img" width={535} height={417} />
         </div>
@@ -21,9 +22,10 @@ const Home = () => {
             Thanks to generous generation we keep kids in school
           </p>
         </div>
-      </div>
+      </section>
 
-      <div className="w-[64%] mx-auto text-zinc-400 self-start px-8">
+      {/* About us Section */}
+      <section className="w-[64%] mx-auto text-zinc-400 self-start px-8">
         <div className="flex items-center gap-4 mb-8 font-metrophobic">
           <p>OVERVIEW</p>
           <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
@@ -44,18 +46,18 @@ const Home = () => {
             PageMaker including versions of Lorem Ipsum.
           </p>
         </div>
-      </div>
+      </section>
 
       {/* CTA banner */}
-      <div className="bg-purple-900 w-full h-64 px-[20%] flex items-center justify-between font-metrophobic">
+      <section className="bg-purple-900 w-full h-64 px-[20%] flex items-center justify-between font-metrophobic">
         <p className="w-[426px] text-white text-6xl ">BECOME A CHARITY TODAY</p>
         <button className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200">
           BE A CHARITY
         </button>
-      </div>
+      </section>
 
       {/* View Charities */}
-      <div className="w-[64%] mx-auto">
+      <section className="w-[64%] mx-auto">
         <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-8 font-metrophobic">
           <p>CHARITIES</p>
           <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
@@ -72,7 +74,7 @@ const Home = () => {
             View More
           </button>
         </div>
-      </div>
+      </section>
     </main>
   );
 };

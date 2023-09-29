@@ -1,6 +1,16 @@
+import { useNavigate } from "react-router-dom";
 const CharityCard = () => {
+  const navigate = useNavigate();
+  const handleOnClick = (id: any) => {
+    navigate(`/charity/${id}`, { state: { id } });
+  };
   return (
-    <div className="w-[262px] h-[338px]  mb-20 bg-white border border-zinc-300">
+    <div
+      className="w-[262px] h-[338px]  mb-20 bg-white border border-zinc-300"
+      onClick={() => {
+        handleOnClick(1);
+      }}
+    >
       <div>
         <img src="/charityImg.png" alt="charity img" width={262} height={154} />
       </div>

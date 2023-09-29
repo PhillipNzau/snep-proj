@@ -11,6 +11,8 @@ import App from "./App.jsx";
 import Home from "./pages/Home.js";
 import "./index.css";
 import Auth from "./pages/Auth.js";
+import Charity from "./pages/Charity.js";
+import SelectedCharity from "./pages/SelectedCharity.tsx";
 
 // 2. Defining the route configuration
 const AppRoutes = () => {
@@ -18,6 +20,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/auth" element={<Auth />} />
       <Route path="/" element={<Home />} />
+      <Route path="/charity" element={<Charity />} />
+      <Route path="/charity/:id" element={<SelectedCharity />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

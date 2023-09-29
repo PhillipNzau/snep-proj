@@ -14,7 +14,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="hover:font-bold text-base w-20 transition-all duration-150 text-center">
-            <Link to="/products" className="font-metrophobic">
+            <Link to="/charity" className="font-metrophobic">
               CHARITIES
             </Link>
           </li>
