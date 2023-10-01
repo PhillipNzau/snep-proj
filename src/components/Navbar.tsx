@@ -26,7 +26,9 @@ const Navbar = () => {
         </ul>
 
         <button className="w-24 h-[25px] bg-purple-900 rounded text-white text-base hover:bg-purple-800 transition-all duration-200 font-metrophobic">
-          Login
+          <Link to="/login" className="font-metrophobic">
+            Login
+          </Link>
         </button>
       </div>
     </nav>
