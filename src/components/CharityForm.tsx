@@ -43,3 +43,8 @@ interface CharityDetails {
             <input type="text" name="firstName" value={charityDetails.firstName} onChange={handleChange} />
           </label>
           <br />
+          <label>
+            Last Name:
+            <input type="text" name="lastName" value={charityDetails.lastName} onChange={handleChange} />
+          </label>
+          <br />
