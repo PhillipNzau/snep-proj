@@ -21,3 +21,10 @@ interface StoryDetails {
         setStoryDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
       };
 
+      const handleCreateStory = () => {
+        // You might want to add validation here
+
+        // Call the onSubmit callback with the story details
+        onSubmit(storyDetails);
+      };
+
