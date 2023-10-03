@@ -48,3 +48,13 @@ interface CharityDetails {
             <input type="text" name="lastName" value={charityDetails.lastName} onChange={handleChange} />
           </label>
           <br />
+          <label>
+            Email:
+            <input type="text" name="email" value={charityDetails.email} onChange={handleChange} />
+          </label>
+          <br />
+          <label>
+            Charity Name:
+            <input type="text" name="charityName" value={charityDetails.charityName} onChange={handleChange} />
+          </label>
+          <br />
