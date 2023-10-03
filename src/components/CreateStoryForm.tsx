@@ -28,7 +28,7 @@ interface StoryDetails {
         onSubmit(storyDetails);
       };
 
-      return (
+return (
         <div>
           <h2>Create Story</h2>
           <label>
@@ -39,3 +39,22 @@ interface StoryDetails {
               value={storyDetails.beneficiaryName}
               onChange={handleChange}
             />
+          </label>
+          <br />
+          <label>
+            Beneficiary Description:
+            <textarea
+              name="beneficiaryDescription"
+              value={storyDetails.beneficiaryDescription}
+              onChange={handleChange}
+            />
+          </label>
+          <br />
+          {/* Add Image Button (You might want to implement this) */}
+          <br />
+          <button onClick={handleCreateStory}>Post</button>
+        </div>
+      );
+    };
+
+    export default CreateStoryForm;
