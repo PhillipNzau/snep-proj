@@ -10,3 +10,9 @@ interface StoryDetails {
     beneficiaryDescription: string;
   }
 
+  const CreateStoryForm: React.FC<CreateStoryFormProps> = ({ onSubmit }) => {
+    const [storyDetails, setStoryDetails] = useState<StoryDetails>({
+      beneficiaryName: '',
+      beneficiaryDescription: '',
+    });
+
