@@ -29,9 +29,17 @@ interface CharityDetails {
     };
 
     const handleCreateCharity = () => {
-      // You might want to add validation here
+      // I will add validation here ...
 
       // Call the onSubmit callback with the charity details
       onSubmit(charityDetails);
     };
 
+    return (
+        <div>
+          <h2>Create Charity</h2>
+          <label>
+            First Name:
+            <input type="text" name="firstName" value={charityDetails.firstName} onChange={handleChange} />
+          </label>
+          <br />
