@@ -28,3 +28,14 @@ interface StoryDetails {
         onSubmit(storyDetails);
       };
 
+      return (
+        <div>
+          <h2>Create Story</h2>
+          <label>
+            Beneficiary Name:
+            <input
+              type="text"
+              name="beneficiaryName"
+              value={storyDetails.beneficiaryName}
+              onChange={handleChange}
+            />
