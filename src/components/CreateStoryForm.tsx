@@ -16,3 +16,8 @@ interface StoryDetails {
       beneficiaryDescription: '',
     });
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setStoryDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+      };
+
