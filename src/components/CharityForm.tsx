@@ -58,3 +58,21 @@ interface CharityDetails {
             <input type="text" name="charityName" value={charityDetails.charityName} onChange={handleChange} />
           </label>
           <br />
+          <label>
+            Charity Description:
+            <textarea name="charityDescription" value={charityDetails.charityDescription} onChange={handleChange} />
+          </label>
+          <br />
+          <label>
+            Amount Goal:
+            <input type="number" name="charityamountGoal" value={charityDetails.charityamountGoal} onChange={handleChange} />
+          </label>
+          <br />
+          {/* Add Image Button (You might want to implement this) */}
+          <br />
+          <button onClick={handleCreateCharity}>Create Charity</button>
+        </div>
+      );
+    };
+
+    export default CharityForm;
