@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export interface Props {
-  title: string;
-  description: string;
-  date: string;
-  image: string;
+  title?: string;
+  description?: string;
+  date?: string;
+  image?: string;
   height?: string;
 }
 
