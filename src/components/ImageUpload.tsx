@@ -15,7 +15,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ field }) => {
 
   return (
     <label
-      className="relative flex items-center justify-center w-32 h-32 bg-purple-900 rounded-md border-dashed border-2 border-purple-900 cursor-pointer"
+      className="relative flex items-center justify-center w-1/2 mx-auto h-32 bg-purple-900 bg-opacity-[33%] rounded-md border-dashed border-2 border-purple-700 cursor-pointer"
       htmlFor={field.name}
     >
       <input
@@ -25,7 +25,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ field }) => {
         accept="image/*"
         onChange={handleFileChange}
       />
-      +
+      <div className="flex flex-col items-center text-purple-900 font-metrophobic">
+        <p className="font-bold text-2xl">+</p>
+        <p>Add Image</p>
+      </div>
     </label>
   );
 };

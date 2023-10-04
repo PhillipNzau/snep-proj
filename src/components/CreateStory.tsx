@@ -33,12 +33,12 @@ const CreateStory: React.FC = () => {
     }, 400);
   };
 
-  //   const handleSubmit = (values: { image: File | null }) => {
-  //     if (values.image) {
-  //       // You can now handle the uploaded image (e.g., send it to a server)
-  //       console.log("Uploaded image:", values.image);
-  //     }
-  //   };
+  // const handleSubmit = (values: { image: File | null }) => {
+  //   if (values.image) {
+  //     // You can now handle the uploaded image (e.g., send it to a server)
+  //     console.log("Uploaded image:", values.image);
+  //   }
+  // };
   return (
     <div className="w-[64%] mx-auto ">
       {/* header */}
@@ -55,8 +55,7 @@ const CreateStory: React.FC = () => {
           onSubmit={onSubmit}
         >
           {({ isSubmitting }) => (
-            <Form>
-              <ImageUpload field="image" />
+            <Form className="flex flex-col gap-8">
               <Field
                 type="text"
                 name="name"
@@ -74,7 +73,7 @@ const CreateStory: React.FC = () => {
                 rows={4}
                 name="description"
                 placeholder="Description"
-                className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic mt-4 w-full placeholder:text-purple-900"
+                className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic  w-full placeholder:text-purple-900"
               />
               <ErrorMessage
                 name="description"
@@ -82,15 +81,16 @@ const CreateStory: React.FC = () => {
                 className="text-rose-600"
               />
 
+              <ImageUpload field="image" />
               {/* <Field type="file" name="image" id="image" accept="image/*" />
               <ErrorMessage name="image" component="div" className="error" /> */}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-12 bg-white text-purple-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3"
+                className="mt-14 bg-white border border-purple-900 text-purple-900 w-96 mx-auto h-14 rounded-lg font-metrophobic font-bold mb-3"
               >
-                Login
+                Create Story
               </button>
             </Form>
           )}
