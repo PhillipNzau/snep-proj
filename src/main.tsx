@@ -14,6 +14,7 @@ import Charity from "./pages/Charity.js";
 import SelectedCharity from "./pages/SelectedCharity.tsx";
 import Login from "./components/Login.tsx";
 import SignUp from "./components/SignUp.tsx";
+import CreateStory from "./components/CreateStory.tsx";
 
 // 2. Defining the route configuration
 const AppRoutes = () => {
@@ -23,6 +24,8 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/charity" element={<Charity />} />
+      <Route path="/charity/create-story" element={<CreateStory />} />
+      <Route path="/charity/create-charity" element={<CreateStory />} />
       <Route path="/charity/:id" element={<SelectedCharity />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
