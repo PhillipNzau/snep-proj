@@ -1,10 +1,17 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Modal } from "./Modal";
+import * as React from "react";
 
 const HoverCard = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   return (
     <>
       {/* hover card effect */}
-      <div className="relative flex items-center justify-center w-72 h-60 bg-gray-900 group hover:cursor-pointer">
+      <div
+        className="relative flex items-center justify-center w-72 h-60 bg-gray-900 group hover:cursor-pointer"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <LazyLoadImage
           className="absolute inset-0 object-cover  w-full h-full group-hover:opacity-50"
           src="/charityImg.png"
@@ -27,6 +34,7 @@ const HoverCard = () => {
           </div>
         </div>
       </div>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
