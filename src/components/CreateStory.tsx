@@ -33,12 +33,12 @@ const CreateStory: React.FC = () => {
     }, 400);
   };
 
-  const handleSubmit = (values: { image: File | null }) => {
-    if (values.image) {
-      // You can now handle the uploaded image (e.g., send it to a server)
-      console.log("Uploaded image:", values.image);
-    }
-  };
+  //   const handleSubmit = (values: { image: File | null }) => {
+  //     if (values.image) {
+  //       // You can now handle the uploaded image (e.g., send it to a server)
+  //       console.log("Uploaded image:", values.image);
+  //     }
+  //   };
   return (
     <div className="w-[64%] mx-auto ">
       {/* header */}

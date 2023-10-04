@@ -8,6 +8,8 @@ interface ImageUploadProps {
 const ImageUpload: React.FC<ImageUploadProps> = ({ field }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
+    console.log("file", file);
+
     // Handle the selected file here or perform any necessary actions
   };
 
