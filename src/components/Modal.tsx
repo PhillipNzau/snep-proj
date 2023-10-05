@@ -15,7 +15,6 @@ export const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
     description: "My Description",
     date: "2023-10-01",
     image: "/charityImg.png",
-    height: "500px",
   };
   return (
     <AnimatePresence>
@@ -24,7 +23,7 @@ export const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
           open={isOpen}
           onClose={setIsOpen}
           as="div"
-          className="fixed inset-0 z-10 flex items-center justify-center overflow-y-auto"
+          className="fixed  inset-0 z-10 flex items-center justify-center overflow-y-auto"
         >
           <div className="flex flex-col py-8 px-4 text-center">
             <Dialog.Overlay />
@@ -69,7 +68,7 @@ export const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
               </span>
 
               <div
-                className="inline-block align-bottom bg-white text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                className="inline-block align-bottom text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-headline"

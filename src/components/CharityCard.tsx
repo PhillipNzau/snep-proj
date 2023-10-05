@@ -7,6 +7,8 @@ export interface Props {
   date?: string;
   image?: string;
   height?: string;
+  width?: string;
+  clamp?: string;
 }
 
 const CharityCard: React.FC<Props> = ({
@@ -14,7 +16,8 @@ const CharityCard: React.FC<Props> = ({
   description,
   date,
   image,
-  height,
+  width,
+  clamp,
 }) => {
   const navigate = useNavigate();
   const handleOnClick = (id: any) => {
@@ -23,26 +26,28 @@ const CharityCard: React.FC<Props> = ({
 
   return (
     <div
-      className={`mb-2 bg-white pb-36 border h-[${height}] border-zinc-300 overflow-scroll`}
+      className={` mb-2 w-[${width}] h-full bg-white pb-36 border  border-zinc-300 overflow-hidden`}
       onClick={() => {
         handleOnClick(1);
       }}
     >
-      <div>
+      <div className="w-full h-[150px] overflow-hidden">
         <LazyLoadImage
           // src="/charityImg.png"
           src={image}
           alt="charity img"
           width={262}
-          height={154}
-          className="w-full"
+          height={150}
+          className="object-cover w-full h-full"
         />
       </div>
 
-      <div className=" px-2 py-3 flex flex-col justify-between h-[180px] ">
+      <div className=" px-2 py-3 flex flex-col justify-between h-full ">
         <div className="flex flex-col gap-4 text-base">
           <h1 className="text-purple-900">{title} Charity Name</h1>
-          <p className="text-zinc-500 font-metrophobic">
+          <p
+            className={`text-zinc-500 font-metrophobic h-full line-clamp-${clamp}`}
+          >
             {description}
             Helping children across kenya get clean water Lorem ipsum dolor sit
             amet consectetur adipisicing elit. Architecto magnam illo explicabo
@@ -56,7 +61,7 @@ const CharityCard: React.FC<Props> = ({
           </p>
         </div>
 
-        <div className="mt-8 flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
+        <div className="mt-8  flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
           <p>PROJECT UPDATE</p>
           <p>{date} 20 SEP 2023</p>
         </div>
