@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LOGIN_USER } from "../services/auth";
-import { useUser } from "../hooks/useUser";
 import { useAuth } from "../hooks/useAuth";
 
 const Login: React.FC = () => {

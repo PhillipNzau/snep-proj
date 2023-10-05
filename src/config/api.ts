@@ -3,7 +3,7 @@ const API_BASE_URL = 'https://donation-api-2ler.onrender.com';
 
 export const API_URLS = {
   LOGIN: `${API_BASE_URL}/login`,
-  USERS: `${API_BASE_URL}/signup`,
+  SINGUP: `${API_BASE_URL}/signup`,
   // ...other API endpoints
 };
 
