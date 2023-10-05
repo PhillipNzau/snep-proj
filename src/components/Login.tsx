@@ -1,12 +1,15 @@
-import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
-import { login } from "../services/auth";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { LOGIN_USER } from "../services/auth";
 import { useUser } from "../hooks/useUser";
+import { useAuth } from "../hooks/useAuth";
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
   // Initialize the useUser hook to manage user-related data
-  const { addUser } = useUser();
+  // const { addUser } = useUser();
   // Initialize a state variable to manage error messages
   const [error, setError] = useState<string | null>(null);
 
@@ -42,11 +45,14 @@ const Login: React.FC = () => {
   ) => {
     try {
       // Call the login function to authenticate the user
-      const user = await login(values);
+      const user = await LOGIN_USER(values);
       // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
       // Add the authenticated user to the user context
-      addUser(user);
+
+      login(user);
+      // Redirect to a specific route upon successful login
+      navigate("/");
       // Clear any previous error messages
       setError(null);
     } catch (error) {

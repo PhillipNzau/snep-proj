@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import { useUser } from "../hooks/useUser";
 
 const Navbar = () => {
+  const { logout } = useAuth();
+  const { user } = useUser();
+
+  const handleLogout = () => {
+    // Simulate a logout action
+    logout();
+  };
   return (
     <nav className="bg-white shadow-md shadow-violet-100 flex items-center justify-between px-12 py-2 ">
       <div>
@@ -25,11 +34,20 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <button className="w-24 h-[25px] bg-purple-900 text-white text-base hover:bg-purple-800 transition-all duration-200 font-metrophobic">
-          <Link to="/login" className="font-metrophobic">
-            Login
-          </Link>
-        </button>
+        {user ? (
+          <button
+            onClick={handleLogout}
+            className="w-24 h-[25px] bg-purple-900 text-white text-base hover:bg-purple-800 transition-all duration-200 font-metrophobic"
+          >
+            Logout
+          </button>
+        ) : (
+          <button className="w-24 h-[25px] bg-purple-900 text-white text-base hover:bg-purple-800 transition-all duration-200 font-metrophobic">
+            <Link to="/login" className="font-metrophobic">
+              Login
+            </Link>
+          </button>
+        )}
       </div>
     </nav>
   );

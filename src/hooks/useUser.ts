@@ -26,12 +26,9 @@ export const useUser = () => {
 
   // Define a function to add a user to the context and local storage
   const addUser = (user: User | null) => {
-    console.log('set user', user);
     
     // Check if the user is not null before updating
     if (user !== null) {
-      console.log('set user 2', user);
-
       // Set the user data in the context
       setUser(user);
       // Store the user data in local storage as a JSON string

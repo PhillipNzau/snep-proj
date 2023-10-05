@@ -2,7 +2,7 @@ import { User } from "../hooks/useUser";
 import { API_URLS } from "../config/api";
 
 // Define an asynchronous function for user login
-export const login = async (credentials: {
+export const LOGIN_USER = async (credentials: {
   email: string;
   password: string;
 }) => {

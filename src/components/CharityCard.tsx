@@ -20,7 +20,6 @@ const CharityCard: React.FC<Props> = ({
   const handleOnClick = (id: any) => {
     navigate(`/charity/${id}`, { state: { id } });
   };
-  console.log("h", height);
 
   return (
     <div
