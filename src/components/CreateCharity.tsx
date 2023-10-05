@@ -76,7 +76,7 @@ const CreateCharity: React.FC = () => {
     <div className="w-[64%] mx-auto ">
       {/* header */}
       <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
-        <p>Create Story</p>
+        <p>Create Charity</p>
         <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
       </div>
 

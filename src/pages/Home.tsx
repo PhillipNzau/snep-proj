@@ -2,9 +2,14 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import SEO from "../components/SEO";
 import CharityCard from "../components/CharityCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Home = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const toCreateCharity = (id: any) => {
+    navigate(`/charity/create-charity`, { state: { id } });
+  };
   return (
     <main className="flex flex-col items-center gap-12 w-full">
       <SEO
@@ -59,7 +64,12 @@ const Home = () => {
       {/* CTA banner */}
       <section className="bg-purple-900 w-full h-64 px-[20%] flex items-center justify-between font-metrophobic">
         <p className="w-[426px] text-white text-6xl ">BECOME A CHARITY TODAY</p>
-        <button className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200">
+        <button
+          className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200"
+          onClick={() => {
+            toCreateCharity(id);
+          }}
+        >
           BE A CHARITY
         </button>
       </section>
