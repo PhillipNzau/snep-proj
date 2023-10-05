@@ -2,6 +2,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import SEO from "../components/SEO";
 import CharityCard from "../components/CharityCard";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -78,7 +79,7 @@ const Home = () => {
           </div>
 
           <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
-            View More
+            <Link to="/charity">View More</Link>
           </button>
         </div>
       </section>

@@ -7,3 +7,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.radio input ~ label {
+  background-color: hsla(264, 41%, 33%, 1);
+  color: white;
+}
+.radio input:checked ~ label {
+  background-color: hsla(0, 0%, 100%, 1);
+  color: hsla(264, 64%, 30%, 1);
+}

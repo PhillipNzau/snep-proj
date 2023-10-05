@@ -16,6 +16,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import CreateStory from "./components/CreateStory";
 import CreateCharity from "./components/CreateCharity";
+import DonateToCharity from "./pages/DonateToCharity";
 
 // 2. Defining the route configuration
 const AppRoutes = () => {
@@ -28,6 +29,7 @@ const AppRoutes = () => {
       <Route path="/charity/create-story" element={<CreateStory />} />
       <Route path="/charity/create-charity" element={<CreateCharity />} />
       <Route path="/charity/:id" element={<SelectedCharity />} />
+      <Route path="/charity/:id/donate" element={<DonateToCharity />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -1,23 +1,13 @@
 // import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HoverCard from "../components/HoverCard";
 
 const SelectedCharity = () => {
+  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  // console.log('sdsd', charity);
-
-  // useEffect(() => {
-  // fetch(`http://localhost:9292/products/${routerState.id}`)
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     let new_data = data[0];
-  //     console.log("pr", new_data);
-  //     setProduct(new_data.product);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error fetching products:", error);
-  //   });
-  // }, []);
+  const handleOnClick = (id: any) => {
+    navigate(`/charity/${id}/donate`, { state: { id } });
+  };
 
   return (
     <>
@@ -100,7 +90,12 @@ const SelectedCharity = () => {
               <HoverCard />
             </div>
 
-            <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+            <button
+              className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+              onClick={() => {
+                handleOnClick(id);
+              }}
+            >
               Donate
             </button>
           </div>
