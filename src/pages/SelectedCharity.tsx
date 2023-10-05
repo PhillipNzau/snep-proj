@@ -9,8 +9,13 @@ const SelectedCharity = () => {
   const isCharity = user?.role == "charity";
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+
   const handleOnClick = (id: any) => {
     navigate(`/charity/${id}/donate`, { state: { id } });
+  };
+
+  const toCreateStory = (id: any) => {
+    navigate(`/charity/${id}/create-story`, { state: { id } });
   };
 
   return (
@@ -100,9 +105,20 @@ const SelectedCharity = () => {
               <HoverCard />
             </div>
 
-            {isAdmin ? (
+            {isAdmin && (
               <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
                 Delete Charity
+              </button>
+            )}
+
+            {isCharity ? (
+              <button
+                className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+                onClick={() => {
+                  toCreateStory(id);
+                }}
+              >
+                Create Story
               </button>
             ) : (
               <button

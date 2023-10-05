@@ -26,7 +26,7 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/charity" element={<Charity />} />
-      <Route path="/charity/create-story" element={<CreateStory />} />
+      <Route path="/charity/:id/create-story" element={<CreateStory />} />
       <Route path="/charity/create-charity" element={<CreateCharity />} />
       <Route path="/charity/:id" element={<SelectedCharity />} />
       <Route path="/charity/:id/donate" element={<DonateToCharity />} />
