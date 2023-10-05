@@ -1,9 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useMatch } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useUser } from "../hooks/useUser";
 
 const Navbar = () => {
   const location = useLocation();
+  const isCharityRoute = useMatch("/charity*");
   const { logout } = useAuth();
   const { user } = useUser();
 
@@ -38,7 +39,7 @@ const Navbar = () => {
             <Link
               to="/charity"
               className={
-                isActive("/charity")
+                isCharityRoute
                   ? "underline underline-offset-8 font-bold font-metrophobic"
                   : ""
               }

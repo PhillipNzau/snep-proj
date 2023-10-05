@@ -1,8 +1,12 @@
 // import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import HoverCard from "../components/HoverCard";
+import { useUser } from "../hooks/useUser";
 
 const SelectedCharity = () => {
+  const { user } = useUser();
+  const isAdmin = user?.role == "admin";
+  const isCharity = user?.role == "charity";
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const handleOnClick = (id: any) => {
@@ -73,6 +77,12 @@ const SelectedCharity = () => {
           </div>
         </div>
 
+        {(isAdmin || isCharity) && (
+          <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+            View Donors
+          </button>
+        )}
+
         {/* Beneficiary story */}
         <div>
           <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
@@ -90,14 +100,20 @@ const SelectedCharity = () => {
               <HoverCard />
             </div>
 
-            <button
-              className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
-              onClick={() => {
-                handleOnClick(id);
-              }}
-            >
-              Donate
-            </button>
+            {isAdmin ? (
+              <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+                Delete Charity
+              </button>
+            ) : (
+              <button
+                className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+                onClick={() => {
+                  handleOnClick(id);
+                }}
+              >
+                Donate
+              </button>
+            )}
           </div>
         </div>
       </div>
