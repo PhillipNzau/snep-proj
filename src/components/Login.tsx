@@ -64,7 +64,7 @@ const Login: React.FC = () => {
     <div className="flex justify-center items-center mx-6 bg-purple-900 md:w-[562px] h-[530px] rounded-xl md:mx-auto">
       <div className="w-[379px]">
         <img
-          src="/public/footer-logo.png"
+          src="/footer-logo.png"
           alt="logo"
           width={197}
           height={74}
