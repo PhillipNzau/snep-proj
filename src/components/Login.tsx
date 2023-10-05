@@ -1,22 +1,33 @@
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import React from "react";
 import { Link } from "react-router-dom";
+import { login } from "../services/auth";
+import { useUser } from "../hooks/useUser";
 
 const Login: React.FC = () => {
+  // Initialize the useUser hook to manage user-related data
+  const { addUser } = useUser();
+  // Initialize a state variable to manage error messages
+  const [error, setError] = useState<string | null>(null);
+
+  // Define the initial form values
   const initialValues = {
     email: "",
     password: "",
   };
 
+  // Define a function to validate form input fields
   const validate = (values: { email: string; password: string }) => {
     const errors: { email?: string; password?: string } = {};
 
+    // Validate the email field
     if (!values.email) {
       errors.email = "Email Required";
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
       errors.email = "Invalid email address";
     }
 
+    // Validate the password field
     if (!values.password) {
       errors.password = "Password Required";
     }
@@ -24,18 +35,28 @@ const Login: React.FC = () => {
     return errors;
   };
 
-  const onSubmit = (
+  // Define the form submission handler
+  const onSubmit = async (
     values: { email: string; password: string },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+    try {
+      // Call the login function to authenticate the user
+      const user = await login(values);
+      // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
-    }, 400);
+      // Add the authenticated user to the user context
+      addUser(user);
+      // Clear any previous error messages
+      setError(null);
+    } catch (error) {
+      // Handle login failure by displaying an error message
+      setError("Login failed. Please check your credentials.");
+    }
   };
 
   return (
-    <div className="flex justify-center items-center mx-6  bg-purple-900 md:w-[562px] h-[530px] rounded-xl md:mx-auto">
+    <div className="flex justify-center items-center mx-6 bg-purple-900 md:w-[562px] h-[530px] rounded-xl md:mx-auto">
       <div className="w-[379px]">
         <img
           src="/public/footer-logo.png"
@@ -52,6 +73,7 @@ const Login: React.FC = () => {
         >
           {({ isSubmitting }) => (
             <Form>
+              {/* Email input field */}
               <Field
                 type="email"
                 name="email"
@@ -64,6 +86,7 @@ const Login: React.FC = () => {
                 className="text-rose-600"
               />
 
+              {/* Password input field */}
               <Field
                 type="password"
                 name="password"
@@ -76,13 +99,21 @@ const Login: React.FC = () => {
                 className="text-rose-600"
               />
 
+              {/* Submit button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-12 bg-white text-purple-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3"
+                className={`mt-12 bg-white text-purple-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
-                Login
+                {isSubmitting ? "Logging in..." : "Login"}
               </button>
+
+              {/* Display error message if there is one */}
+              {error && <p className="text-red-500">{error}</p>}
+
+              {/* Sign-up link */}
               <p className="text-white font-metrophobic">
                 Don't have an account?{" "}
                 <span className="hover:cursor-pointer">
