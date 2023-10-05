@@ -1,5 +1,5 @@
 import { useUser } from "../hooks/useUser";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
@@ -52,34 +52,31 @@ const DonateToCharity: React.FC = () => {
   };
 
   // Define the form submission handler
-  //   const onSubmit = async (
-  //     values: { interval: string; amount: string; anonymous: string },
-  //     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
-  //   ) => {
-  //     try {
-  //       console.log("valies", values);
+  const onSubmit = async (
+    values: { interval: string; amount: string; anonymous: string },
+    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
+  ) => {
+    try {
+      console.log("valies", values);
 
-  //       // Call the login function to authenticate the user
-  //       const donateData = await DONATE(values);
-  //       // Disable the submit button to prevent multiple submissions
-  //       setSubmitting(false);
-  //       // Add the authenticated user to the user context
+      // Call the login function to authenticate the user
+      const donateData = await DONATE(values);
+      // Disable the submit button to prevent multiple submissions
+      setSubmitting(false);
+      // Add the authenticated user to the user context
 
-  //       console.log("donte data res", donateData);
+      console.log("donte data res", donateData);
 
-  //       // Redirect to a specific route upon successful login
-  //       navigate("/");
-  //       // Clear any previous error messages
-  //       setError(null);
-  //     } catch (error) {
-  //       // Handle login failure by displaying an error message
-  //       setError("Login failed. Please check your credentials.");
-  //     }
-  //   };
-
-  const onSubmit = () => {
-    console.log("onsubmit");
+      // Redirect to a specific route upon successful login
+      navigate("/");
+      // Clear any previous error messages
+      setError(null);
+    } catch (error) {
+      // Handle login failure by displaying an error message
+      setError("Login failed. Please check your credentials.");
+    }
   };
+
   // check if user is logged in
   if (!user) {
     return null; // You can return null or a loading indicator here
