@@ -1,11 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { SIGNUP_USER } from "../services/auth";
+import { useAuth } from "../hooks/useAuth";
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    secondname: "",
     email: "",
     password: "",
     role: "regular",
@@ -14,28 +20,28 @@ const SignUp: React.FC = () => {
   const validate = (values: {
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    secondname: string;
     role: string;
   }) => {
     const errors: {
       email?: string;
       password?: string;
-      firstName?: string;
-      lastName?: string;
+      firstname?: string;
+      secondname?: string;
       role?: string;
     } = {};
 
-    if (!values.firstName) {
-      errors.firstName = "first name Required";
+    if (!values.firstname) {
+      errors.firstname = "first name Required";
     }
 
-    if (!values.lastName) {
-      errors.lastName = "last name Required";
+    if (!values.secondname) {
+      errors.secondname = "second name Required";
     }
 
     if (!values.role) {
-      errors.role = "last name Required";
+      errors.role = "role Required";
     }
 
     if (!values.email) {
@@ -51,14 +57,32 @@ const SignUp: React.FC = () => {
     return errors;
   };
 
-  const onSubmit = (
-    values: { email: string; password: string },
+  const onSubmit = async (
+    values: {
+      email: string;
+      password: string;
+      firstname: string;
+      secondname: string;
+      role: string;
+    },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+    try {
+      // Call the login function to authenticate the user
+      const user = await SIGNUP_USER(values);
+      // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
-    }, 400);
+      // Add the authenticated user to the user context
+
+      login(user);
+      // Redirect to a specific route upon successful login
+      navigate("/");
+      // Clear any previous error messages
+      setError(null);
+    } catch (error) {
+      // Handle login failure by displaying an error message
+      setError("signup failed. Please check your credentials.");
+    }
   };
 
   return (
@@ -81,24 +105,24 @@ const SignUp: React.FC = () => {
             <Form className="flex flex-col gap-2">
               <Field
                 type="text"
-                name="firstName"
+                name="firstname"
                 placeholder="First Name"
                 className="bg-transparent outline-none border border-white p-2 rounded-lg text-white font-metrophobic w-full h-14"
               />
               <ErrorMessage
-                name="firstName"
+                name="firstname"
                 component="div"
                 className="text-rose-600"
               />
 
               <Field
                 type="text"
-                name="lastName"
+                name="secondname"
                 placeholder="Last Name"
                 className="bg-transparent outline-none border border-white p-2 rounded-lg text-white font-metrophobic w-full h-14"
               />
               <ErrorMessage
-                name="lastName"
+                name="secondname"
                 component="div"
                 className="text-rose-600"
               />
@@ -139,13 +163,20 @@ const SignUp: React.FC = () => {
                 <option value="regular">Regular</option>
               </Field>
 
+              {/* Submit button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-12 bg-white text-purple-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3"
+                className={`mt-12 bg-white text-purple-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
-                Login
+                {isSubmitting ? "Signing up..." : "Singup"}
               </button>
+
+              {/* Display error message if there is one */}
+              {error && <p className="text-red-500">{error}</p>}
+
               <p className="text-white font-metrophobic">
                 Already have an account?{" "}
                 <span className="hover:cursor-pointer">
