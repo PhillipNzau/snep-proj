@@ -70,11 +70,11 @@ const Home = () => {
           <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
         </div>
         <div className="flex flex-col items-center justify-center flex-wrap gap-4 w-full ">
-          <div className="flex items-center justify-between  flex-wrap gap-4 w-[95%]">
-            <CharityCard />
-            <CharityCard />
-            <CharityCard />
-            <CharityCard />
+          <div className="flex items-center justify-between flex-wrap gap-4 w-[95%] md:grid grid-cols-3">
+            <CharityCard clamp="3" />
+            <CharityCard clamp="3" />
+            <CharityCard clamp="3" />
+            <CharityCard clamp="3" />
           </div>
 
           <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
