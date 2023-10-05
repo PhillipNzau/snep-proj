@@ -7,15 +7,15 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import App from "./App.jsx";
-import Home from "./pages/Home.js";
+import App from "./App";
+import Home from "./pages/Home";
 import "./index.css";
-import Charity from "./pages/Charity.js";
-import SelectedCharity from "./pages/SelectedCharity.tsx";
-import Login from "./components/Login.tsx";
-import SignUp from "./components/SignUp.tsx";
-import CreateStory from "./components/CreateStory.tsx";
-import CreateCharity from "./components/CreateCharity.tsx";
+import Charity from "./pages/Charity";
+import SelectedCharity from "./pages/SelectedCharity";
+import Login from "./components/Login";
+import SignUp from "./components/SignUp";
+import CreateStory from "./components/CreateStory";
+import CreateCharity from "./components/CreateCharity";
 
 // 2. Defining the route configuration
 const AppRoutes = () => {

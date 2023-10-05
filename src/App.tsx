@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -7,7 +7,7 @@ import AuthContext from "./context/AuthContext";
 import { useAuth } from "./hooks/useAuth";
 import { useLocation } from "react-router-dom";
 
-const App: React.FC = ({ children }: any) => {
+const App: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { user, setUser } = useAuth();
   const location = useLocation();
 

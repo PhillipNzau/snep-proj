@@ -173,6 +173,10 @@ const SignUp: React.FC = () => {
               >
                 {isSubmitting ? "Signing up..." : "Singup"}
               </button>
+
+              {/* Display error message if there is one */}
+              {error && <p className="text-red-500">{error}</p>}
+
               <p className="text-white font-metrophobic">
                 Already have an account?{" "}
                 <span className="hover:cursor-pointer">
