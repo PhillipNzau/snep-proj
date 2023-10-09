@@ -1,16 +1,7 @@
-// import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import HoverCard from "../components/HoverCard";
 import { useUser } from "../hooks/useUser";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DonorModal } from "@/components/DonorModal";
 
 const SelectedCharity = () => {
@@ -146,7 +137,7 @@ const SelectedCharity = () => {
         </div>
       </div>
 
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[800px]">
         <DonorModal />
       </DialogContent>
     </Dialog>
