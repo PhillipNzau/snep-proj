@@ -2,6 +2,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import HoverCard from "../components/HoverCard";
 import { useUser } from "../hooks/useUser";
+import { DonorModal } from "../components/DonorModal";
+import * as React from "react";
 
 const SelectedCharity = () => {
   const { user } = useUser();
@@ -17,6 +19,8 @@ const SelectedCharity = () => {
   const toCreateStory = (id: any) => {
     navigate(`/charity/${id}/create-story`, { state: { id } });
   };
+
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <>
@@ -83,7 +87,10 @@ const SelectedCharity = () => {
         </div>
 
         {(isAdmin || isCharity) && (
-          <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+          <button
+            className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             View Donors
           </button>
         )}
@@ -133,6 +140,8 @@ const SelectedCharity = () => {
           </div>
         </div>
       </div>
+
+      <DonorModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
