@@ -1,8 +1,18 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import CharityCard from "../components/CharityCard";
 import SEO from "../components/SEO";
+import { useUser } from "../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 const Charity = () => {
+  const { user } = useUser();
+  // const isAdmin = user?.role == "admin";
+  const isCharity = user?.role == "charity";
+  const navigate = useNavigate();
+
+  const toCreateCharity = () => {
+    navigate(`/charity/create-charity`);
+  };
   return (
     <main className="flex flex-col items-center gap-12 w-full">
       <SEO
@@ -48,9 +58,20 @@ const Charity = () => {
             <CharityCard clamp="3" width="375px" />
           </div>
 
-          <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
-            View More
-          </button>
+          {isCharity ? (
+            <button
+              className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+              onClick={() => {
+                toCreateCharity();
+              }}
+            >
+              Add Charity
+            </button>
+          ) : (
+            <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+              View More
+            </button>
+          )}
         </div>
       </section>
     </main>
