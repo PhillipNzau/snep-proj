@@ -1,8 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import React from "react";
+import { useUser } from "../hooks/useUser";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import ImageUpload from "./ImageUpload";
 
 const CreateStory: React.FC = () => {
+  const { user } = useUser();
+  const navigate = useNavigate();
+  useEffect(() => {
+    // Check if the user is not available, then redirect to "/login"
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
   const initialValues = {
     name: "",
     description: "",
