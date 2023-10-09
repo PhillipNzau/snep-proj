@@ -1,7 +1,8 @@
-// import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import HoverCard from "../components/HoverCard";
 import { useUser } from "../hooks/useUser";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { DonorModal } from "@/components/DonorModal";
 
 const SelectedCharity = () => {
   const { user } = useUser();
@@ -19,7 +20,7 @@ const SelectedCharity = () => {
   };
 
   return (
-    <>
+    <Dialog>
       {/* back button */}
       <div
         className="w-[64%] mx-auto py-4  flex justify-start items-center gap-4 transition-all duration-300 group  hover:cursor-pointer mb-8 text-zinc-500"
@@ -83,9 +84,11 @@ const SelectedCharity = () => {
         </div>
 
         {(isAdmin || isCharity) && (
-          <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
-            View Donors
-          </button>
+          <DialogTrigger asChild>
+            <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+              View Donors
+            </button>
+          </DialogTrigger>
         )}
 
         {/* Beneficiary story */}
@@ -133,7 +136,11 @@ const SelectedCharity = () => {
           </div>
         </div>
       </div>
-    </>
+
+      <DialogContent className="sm:max-w-[800px]">
+        <DonorModal />
+      </DialogContent>
+    </Dialog>
   );
 };
 
