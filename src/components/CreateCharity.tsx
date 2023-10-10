@@ -1,12 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useUser } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ImageUpload from "./ImageUpload";
+import { CREATE_CHARITY } from "@/services/charity";
 
 const CreateCharity: React.FC = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     // Check if the user is not available, then redirect to "/login"
     if (!user) {
@@ -15,43 +18,31 @@ const CreateCharity: React.FC = () => {
   }, [user, navigate]);
 
   const initialValues = {
-    first_name: "",
-    last_name: "",
-    charity_name: "",
-    email: "",
+    name: "",
     description: "",
-    image: null as File | null,
+    goal: "",
+    // image_url: "",
+    // image: null as File | null,
   };
 
   const validate = (values: {
-    first_name: string;
-    last_name: string;
-    charity_name: string;
-    email: string;
+    name: string;
     description: string;
+    goal: string;
+    // image_url: string;
   }) => {
     const errors: {
-      first_name?: string;
-      last_name?: string;
-      charity_name?: string;
-      email?: string;
+      name?: string;
       description?: string;
+      goal?: string;
+      // image_url?: string;
     } = {};
 
-    if (!values.first_name) {
-      errors.first_name = "First Name Required";
+    if (!values.name) {
+      errors.name = "Charity Name Required";
     }
-    if (!values.last_name) {
-      errors.last_name = "Last Name Required";
-    }
-    if (!values.charity_name) {
-      errors.charity_name = "Charity Name Required";
-    }
-
-    if (!values.email) {
-      errors.email = "Email Required";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "Invalid email address";
+    if (!values.goal) {
+      errors.goal = "Goal Required";
     }
 
     if (!values.description) {
@@ -61,20 +52,35 @@ const CreateCharity: React.FC = () => {
     return errors;
   };
 
-  const onSubmit = (
+  const onSubmit = async (
     values: {
-      first_name: string;
-      last_name: string;
-      charity_name: string;
-      email: string;
+      name: string;
       description: string;
+      goal: string;
     },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+    try {
+      const data = {
+        ...values,
+        user_id: user?.id,
+      };
+      // Call the login function to authenticate the user
+      const charity = await CREATE_CHARITY(data);
+      // setSubmitting(false);
+
+      // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
-    }, 400);
+      // Redirect to a specific route upon successful login
+      navigate("/charity");
+      // Redirect to a specific route upon successful login
+      // Clear any previous error messages
+      setError(null);
+      return charity;
+    } catch (error) {
+      // Handle login failure by displaying an error message
+      setError("Creation failed. Please check your data.");
+    }
   };
 
   //   const handleSubmit = (values: { image: File | null }) => {
@@ -104,60 +110,38 @@ const CreateCharity: React.FC = () => {
                 <div className="w-full">
                   <Field
                     type="text"
-                    name="first_name"
-                    placeholder="First Name"
-                    className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
-                  />
-                  <ErrorMessage
-                    name="first_name"
-                    component="div"
-                    className="text-rose-600"
-                  />
-                </div>
-                <div className="w-full">
-                  <Field
-                    type="text"
-                    name="last_name"
-                    placeholder="Last Name"
-                    className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
-                  />
-                  <ErrorMessage
-                    name="last_name"
-                    component="div"
-                    className="text-rose-600"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-between gap-4">
-                <div className="w-full">
-                  <Field
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-rose-600"
-                  />
-                </div>
-
-                <div className="w-full">
-                  <Field
-                    type="text"
-                    name="charity_name"
+                    name="name"
                     placeholder="Charity Name"
                     className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
                   />
                   <ErrorMessage
-                    name="charity_name"
+                    name="name"
                     component="div"
                     className="text-rose-600"
                   />
                 </div>
+                <div className="w-full">
+                  <Field
+                    type="number"
+                    name="goal"
+                    placeholder="Charity goal"
+                    className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
+                  />
+                  <ErrorMessage
+                    name="goal"
+                    component="div"
+                    className="text-rose-600"
+                  />
+                  {/* <Field
+                    type="text"
+                    name="image_url"
+                    placeholder="Charity goal"
+                    // value="something"
+                    className=" bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
+                  /> */}
+                </div>
               </div>
+
               <Field
                 as="textarea"
                 rows={4}
@@ -182,6 +166,7 @@ const CreateCharity: React.FC = () => {
               >
                 Create Charity
               </button>
+              {error && <p className="text-red-500">{error}</p>}
             </Form>
           )}
         </Formik>

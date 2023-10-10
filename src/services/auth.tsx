@@ -26,6 +26,8 @@ export const LOGIN_USER = async (credentials: {
 
     // Construct a User object with relevant properties from the response
     const user: User = {
+      id: userData.user.id,
+
       first_name: userData.user.first_name,
       last_name: userData.user.last_name,
       email: userData.user.email, // Use the provided email from credentials
@@ -69,6 +71,7 @@ export const SIGNUP_USER = async (credentials: {
 
     // Construct a User object with relevant properties from the response
     const user: User = {
+      id: userData.user.id,
       first_name: userData.user.first_name,
       last_name: userData.user.last_name,
       email: userData.user.email, // Use the provided email from credentials

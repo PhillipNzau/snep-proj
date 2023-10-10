@@ -31,6 +31,7 @@ export const useUser = () => {
     if (user !== null) {
       // Set the user data in the context
       setUser(user);
+      
       // Store the user data in local storage as a JSON string
       setItem("user", JSON.stringify(user));
     }
