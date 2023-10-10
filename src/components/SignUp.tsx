@@ -10,8 +10,8 @@ const SignUp: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const initialValues = {
-    firstname: "",
-    secondname: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     role: "regular",
@@ -20,24 +20,24 @@ const SignUp: React.FC = () => {
   const validate = (values: {
     email: string;
     password: string;
-    firstname: string;
-    secondname: string;
+    first_name: string;
+    last_name: string;
     role: string;
   }) => {
     const errors: {
       email?: string;
       password?: string;
-      firstname?: string;
-      secondname?: string;
+      first_name?: string;
+      last_name?: string;
       role?: string;
     } = {};
 
-    if (!values.firstname) {
-      errors.firstname = "first name Required";
+    if (!values.first_name) {
+      errors.first_name = "first name Required";
     }
 
-    if (!values.secondname) {
-      errors.secondname = "second name Required";
+    if (!values.last_name) {
+      errors.last_name = "second name Required";
     }
 
     if (!values.role) {
@@ -61,8 +61,8 @@ const SignUp: React.FC = () => {
     values: {
       email: string;
       password: string;
-      firstname: string;
-      secondname: string;
+      first_name: string;
+      last_name: string;
       role: string;
     },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
@@ -105,24 +105,24 @@ const SignUp: React.FC = () => {
             <Form className="flex flex-col gap-2">
               <Field
                 type="text"
-                name="firstname"
+                name="first_name"
                 placeholder="First Name"
                 className="bg-transparent outline-none border border-white p-2 rounded-lg text-white font-metrophobic w-full h-14"
               />
               <ErrorMessage
-                name="firstname"
+                name="first_name"
                 component="div"
                 className="text-rose-600"
               />
 
               <Field
                 type="text"
-                name="secondname"
+                name="last_name"
                 placeholder="Last Name"
                 className="bg-transparent outline-none border border-white p-2 rounded-lg text-white font-metrophobic w-full h-14"
               />
               <ErrorMessage
-                name="secondname"
+                name="last_name"
                 component="div"
                 className="text-rose-600"
               />

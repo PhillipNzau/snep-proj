@@ -26,11 +26,11 @@ export const LOGIN_USER = async (credentials: {
 
     // Construct a User object with relevant properties from the response
     const user: User = {
-      firstname: userData.firstname,
-      secondname: userData.secondname,
-      email: credentials.email, // Use the provided email from credentials
-      role: userData.role,
-      token: userData.token,
+      first_name: userData.user.first_name,
+      last_name: userData.user.last_name,
+      email: userData.user.email, // Use the provided email from credentials
+      role: userData.user.role,
+      token: userData.access_token,
     };
 
     // Return the constructed User object
@@ -45,8 +45,8 @@ export const LOGIN_USER = async (credentials: {
 export const SIGNUP_USER = async (credentials: {
   email: string;
   password: string;
-  firstname: string;
-  secondname: string;
+  first_name: string;
+  last_name: string;
   role: string;
 }) => {
   try {
@@ -69,11 +69,11 @@ export const SIGNUP_USER = async (credentials: {
 
     // Construct a User object with relevant properties from the response
     const user: User = {
-      firstname: userData.firstname,
-      secondname: userData.secondname,
-      email: credentials.email, // Use the provided email from credentials
-      role: userData.role,
-      token: userData.token,
+      first_name: userData.user.first_name,
+      last_name: userData.user.last_name,
+      email: userData.user.email, // Use the provided email from credentials
+      role: userData.user.role,
+      token: userData.access_token,
     };
 
     // Return the constructed User object

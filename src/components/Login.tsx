@@ -45,6 +45,7 @@ const Login: React.FC = () => {
     try {
       // Call the login function to authenticate the user
       const user = await LOGIN_USER(values);
+
       // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
       // Add the authenticated user to the user context
