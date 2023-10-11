@@ -93,3 +93,9 @@ const validateForm = (): boolean => {
     alert('Charity Amount Goal must be a positive number.');
     return false;
   }
+
+  //This is a validation for the no empty charity image field
+  if (!formData.charityImage) {
+    alert('Please upload a Charity Image.');
+    return false;
+  }
