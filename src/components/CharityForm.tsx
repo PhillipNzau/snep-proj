@@ -81,3 +81,9 @@ const validateForm = (): boolean => {
     alert('Charity Description must be at least 50 characters long.');
     return false;
   }
+
+  //This Validation ni ya no empty charity amount goal
+  if (!formData.charityAmountGoal) {
+    alert('Please enter the Charity Amount Goal.');
+    return false;
+  }
