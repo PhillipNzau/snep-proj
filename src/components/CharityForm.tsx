@@ -51,3 +51,8 @@ const validateForm = (): boolean => {
     alert('Please enter your Last Name.');
     return false;
   }
+  // So, this validation is for an empty field for email
+  if (!formData.email) {
+    alert('Please enter your Email.');
+    return false;
+  }
