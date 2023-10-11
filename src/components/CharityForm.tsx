@@ -15,4 +15,14 @@ interface CharityFormData {
   charityImage: File | null;
 }
 
-const
+const CharityForm: React.FC<CharityFormProps> = ({ onSubmit }) => {
+  const [formData, setFormData] = useState<CharityFormData>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    charityName: '',
+    charityDescription: '',
+    charityAmountGoal: 0,
+    charityImage: null,
+  });
+}
