@@ -56,3 +56,10 @@ const validateForm = (): boolean => {
     alert('Please enter your Email.');
     return false;
   }
+
+  // Validatin for how the email format should be
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+    alert('Please enter a valid email address.');
+    return false;
+  }
