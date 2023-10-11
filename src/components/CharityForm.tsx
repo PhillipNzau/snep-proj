@@ -63,3 +63,9 @@ const validateForm = (): boolean => {
     alert('Please enter a valid email address.');
     return false;
   }
+
+  // This Validation is for no empty charity name
+  if (!formData.charityName) {
+    alert('Please enter the Charity Name.');
+    return false;
+  }
