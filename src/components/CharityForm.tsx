@@ -40,9 +40,14 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 const validateForm = (): boolean => {
-  // Validation for non-empty first name
+  //This validation for no empty field for firstName
   if (!formData.firstName) {
     alert('Please enter your First Name.');
     return false;
   }
 
+  // This Validation is for no empty field for LastName
+  if (!formData.lastName) {
+    alert('Please enter your Last Name.');
+    return false;
+  }
