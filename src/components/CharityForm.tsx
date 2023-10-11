@@ -49,12 +49,77 @@ const CharityForm: React.FC<CharityFormProps> = ({ onSubmit }) => {
       !formData.charityAmountGoal ||
       !formData.charityImage
     ) {
-      // Validation alerts for each field
-      // ... (Your existing validation logic)
+      // Below are validation alerts for each field..
+
+  //This validation for no empty field for firstName
+  if (!formData.firstName) {
+    alert('Please enter your First Name.');
+    return false;
+  }
+
+  // This Validation is for no empty field for LastName
+  if (!formData.lastName) {
+    alert('Please enter your Last Name.');
+    return false;
+  }
+  // So, this validation is for an empty field for email
+  if (!formData.email) {
+    alert('Please enter your Email.');
+    return false;
+  }
+
+  // Validatin for how the email format should be
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(formData.email)) {
+    alert('Please enter a valid email address.');
+    return false;
+  }
+
+  // This Validation is for no empty charity name
+  if (!formData.charityName) {
+    alert('Please enter the Charity Name.');
+    return false;
+  }
+
+  // This Validation is for the Charity Description Field - should not be empty
+  if (!formData.charityDescription) {
+    alert('Please enter the Charity Description.');
+    return false;
+  }
+
+  // Minimum length requirement for Charity Description
+  if (formData.charityDescription.length < 50) {
+    alert('Charity Description must be at least 50 characters long.');
+    return false;
+  }
+
+  //This Validation ni ya no empty charity amount goal
+  if (!formData.charityAmountGoal) {
+    alert('Please enter the Charity Amount Goal.');
+    return false;
+  }
+
+  // This is a numeric validation for charity amount goal
+  if (isNaN(formData.charityAmountGoal) || formData.charityAmountGoal <= 0) {
+    alert('Charity Amount Goal must be a positive number.');
+    return false;
+  }
+
+  //This is a validation for the no empty charity image field
+  if (!formData.charityImage) {
+    alert('Please upload a Charity Image.');
+    return false;
+  }
+
+  // This Validation is for the image format allowed which are (JPG, JPEG, PNG, SVG)
+  const allowedImageFormats = ['jpg', 'jpeg', 'png', 'svg'];
+    const imageExtension = formData.charityImage?.name.split('.').pop()?.toLowerCase();
+    if (!imageExtension || !allowedImageFormats.includes(imageExtension)) {
+      alert('Please upload a valid image with format JPG, JPEG, PNG, or SVG.');
       return false;
     }
 
-    // Additional validations can be added here...
+    // Future additional validations can be added here...
 
     return true;
   };
@@ -79,7 +144,7 @@ const CharityForm: React.FC<CharityFormProps> = ({ onSubmit }) => {
     return () => clearTimeout(timeout);
   }, [successMessage]);
 
-  return (
+return (
     <div>
       <h2>Charity Form</h2>
       <label>
