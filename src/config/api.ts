@@ -7,6 +7,7 @@ export const API_URLS = {
   LOGIN: `${API_BASE_URL}/login`,
   SINGUP: `${API_BASE_URL}/register`,
   CHARITIES: `${API_BASE_URL}/charities`,
+  STORIES: `${API_BASE_URL}/charities`,
   DONATE: `${API_BASE_URL}/donate`,
   // ...other API endpoints
 };

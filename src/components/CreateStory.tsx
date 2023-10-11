@@ -1,29 +1,44 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useUser } from "../hooks/useUser";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import ImageUpload from "./ImageUpload";
+import { CREATE_STORY } from "@/services/story";
 
 const CreateStory: React.FC = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     // Check if the user is not available, then redirect to "/login"
     if (!user) {
       navigate("/login");
     }
   }, [user, navigate]);
+
   const initialValues = {
     name: "",
     description: "",
-    image: null as File | null,
+    // image_url: "",
+    // image: null as File | null,
   };
 
-  const validate = (values: { name: string; description: string }) => {
-    const errors: { name?: string; description?: string } = {};
+  const validate = (values: {
+    name: string;
+    description: string;
+    // image_url: string;
+  }) => {
+    const errors: {
+      name?: string;
+      description?: string;
+      // image_url?: string;
+    } = {};
 
     if (!values.name) {
-      errors.name = "Name Required";
+      errors.name = "Beneficiary Name Required";
     }
 
     if (!values.description) {
@@ -33,14 +48,34 @@ const CreateStory: React.FC = () => {
     return errors;
   };
 
-  const onSubmit = (
-    values: { name: string; description: string },
+  const onSubmit = async (
+    values: {
+      name: string;
+      description: string;
+    },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
+    try {
+      const data = {
+        ...values,
+        charity_id: id,
+      };
+      // Call the login function to authenticate the user
+      const story = await CREATE_STORY(data);
+      // setSubmitting(false);
+
+      // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
-    }, 400);
+      // Redirect to a specific route upon successful login
+      navigate("/charity");
+      // Redirect to a specific route upon successful login
+      // Clear any previous error messages
+      setError(null);
+      return story;
+    } catch (error) {
+      // Handle login failure by displaying an error message
+      setError("Creation failed. Please check your data.");
+    }
   };
 
   // const handleSubmit = (values: { image: File | null }) => {
@@ -102,6 +137,7 @@ const CreateStory: React.FC = () => {
               >
                 Create Story
               </button>
+              {error && <p className="text-red-500">{error}</p>}
             </Form>
           )}
         </Formik>
