@@ -99,3 +99,11 @@ const validateForm = (): boolean => {
     alert('Please upload a Charity Image.');
     return false;
   }
+
+  // This Validation is for the image format allowed which are (JPG, JPEG, PING, SVG)
+  const allowedImageFormats = ['jpg', 'jpeg', 'png', 'svg'];
+    const imageExtension = formData.charityImage?.name.split('.').pop()?.toLowerCase();
+    if (!imageExtension || !allowedImageFormats.includes(imageExtension)) {
+      alert('Please upload a valid image with format JPG, JPEG, PNG, or SVG.');
+      return false;
+    }
