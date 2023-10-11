@@ -69,3 +69,11 @@ const validateForm = (): boolean => {
     alert('Please enter the Charity Name.');
     return false;
   }
+
+  // This Validation is for the Charity Description Field - should not be empty
+  if (!formData.charityDescription) {
+    alert('Please enter the Charity Description.');
+    return false;
+  }
+
+
