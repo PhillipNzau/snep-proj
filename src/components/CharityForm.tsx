@@ -25,4 +25,3 @@ const CharityForm: React.FC<CharityFormProps> = ({ onSubmit }) => {
     charityAmountGoal: 0,
     charityImage: null,
   });
-}
