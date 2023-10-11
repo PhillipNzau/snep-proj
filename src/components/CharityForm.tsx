@@ -39,4 +39,10 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setFormData((preData) =>({ ...prevData, charityImage: file }));
 };
 
-const handleSubmit
+const validateForm = (): boolean => {
+  // Validation for non-empty first name
+  if (!formData.firstName) {
+    alert('Please enter your First Name.');
+    return false;
+  }
+
