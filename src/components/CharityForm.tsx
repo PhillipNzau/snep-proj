@@ -87,3 +87,9 @@ const validateForm = (): boolean => {
     alert('Please enter the Charity Amount Goal.');
     return false;
   }
+
+  // This is a numeric validation for charity amount goal
+  if (isNaN(formData.charityAmountGoal) || formData.charityAmountGoal <= 0) {
+    alert('Charity Amount Goal must be a positive number.');
+    return false;
+  }
