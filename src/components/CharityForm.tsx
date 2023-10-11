@@ -76,4 +76,8 @@ const validateForm = (): boolean => {
     return false;
   }
 
-
+  // Minimum length requirement for Charity Description
+  if (formData.charityDescription.length < 50) {
+    alert('Charity Description must be at least 50 characters long.');
+    return false;
+  }
