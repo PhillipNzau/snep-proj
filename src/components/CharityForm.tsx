@@ -40,6 +40,15 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 const validateForm = (): boolean => {
+  if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.charityName ||
+      !formData.charityDescription ||
+      !formData.charityAmountGoal ||
+      !formData.charityImage
+  ) {
   //This validation for no empty field for firstName
   if (!formData.firstName) {
     alert('Please enter your First Name.');
@@ -107,3 +116,25 @@ const validateForm = (): boolean => {
       alert('Please upload a valid image with format JPG, JPEG, PNG, or SVG.');
       return false;
     }
+    //future additional Validations will continue here...
+
+    return true;
+  };
+
+const handleSubmit = () => {
+  if (validatingForm()) {
+    //we are sure (just assuming) validation(s) passed, this will trigger onSubmit
+    onSubmit(formData);
+    setSuccessMessage('Registration is successful. Thank you for registering with us. Welcome to Donation APP');
+  }
+};
+
+UseEffect(() => {
+  let timeout: NodeJS.Timeout;
+  if (successMessage) {
+    timeout = setTimeout(() => {
+      setSuccessMessage(null);
+    }, 60000);
+    })
+  }
+})
