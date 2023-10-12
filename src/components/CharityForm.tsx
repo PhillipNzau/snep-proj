@@ -123,3 +123,23 @@ const CharityForm: React.FC<CharityFormProps> = ({ onSubmit }) => {
 
         return true;
       };
+
+      const handleSubmit = () => {
+        if (validateForm()) {
+          onSubmit(formData);
+          setSuccessMessage(
+            'Registration is successful. Thank you for registering with us. Welcome to Donation APP'
+          );
+        }
+      };
+
+      useEffect(() => {
+        let timeout: NodeJS.Timeout;
+        if (successMessage) {
+          timeout = setTimeout(() => {
+            setSuccessMessage(null);
+          }, 60000); // Equivalent to 1 minute
+        }
+
+        return () => clearTimeout(timeout);
+      }, [successMessage]);
