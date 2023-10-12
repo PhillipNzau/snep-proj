@@ -3,13 +3,28 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import SEO from "../components/SEO";
 import CharityCard from "../components/CharityCard";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GET_CHARITY } from "@/services/charity";
+import { CharityModel } from "@/models/CharityModel";
+import { useUser } from "@/hooks/useUser";
 
-const Home = () => {
+const Home: React.FC = () => {
+  const [charities, setCharities] = useState<CharityModel[] | null>(null);
+  const { user } = useUser();
+
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const toCreateCharity = (id: any) => {
     navigate(`/charity/create-charity`, { state: { id } });
   };
+  // fetch charities
+  const getCharities = async () => {
+    const getCharity = await GET_CHARITY();
+    setCharities(getCharity);
+  };
+  useEffect(() => {
+    getCharities();
+  }, [user]);
   return (
     <main className="flex flex-col items-center gap-12 w-full">
       <SEO
@@ -82,10 +97,18 @@ const Home = () => {
         </div>
         <div className="flex flex-col items-center justify-center flex-wrap gap-4 w-full ">
           <div className="flex items-center justify-between flex-wrap gap-4 w-[95%] md:grid grid-cols-3">
-            <CharityCard clamp="3" />
-            <CharityCard clamp="3" />
-            <CharityCard clamp="3" />
-            <CharityCard clamp="3" />
+            {charities &&
+              charities.map((charity) => (
+                <CharityCard
+                  key={charity?.id}
+                  title={charity.name}
+                  description={charity.description}
+                  date={charity.created_at}
+                  image={charity.image_url}
+                  clamp="3"
+                  width="375px"
+                />
+              ))}
           </div>
 
           <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">

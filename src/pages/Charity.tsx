@@ -3,8 +3,12 @@ import CharityCard from "../components/CharityCard";
 import SEO from "../components/SEO";
 import { useUser } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { GET_CHARITY } from "@/services/charity";
+import { CharityModel } from "@/models/CharityModel";
 
-const Charity = () => {
+const Charity: React.FC = () => {
+  const [charities, setCharities] = useState<CharityModel[] | null>(null);
   const { user } = useUser();
   // const isAdmin = user?.role == "admin";
   const isCharity = user?.role == "charity";
@@ -13,6 +17,16 @@ const Charity = () => {
   const toCreateCharity = () => {
     navigate(`/charity/create-charity`);
   };
+
+  // fetch charities
+  const getCharities = async () => {
+    const getCharity = await GET_CHARITY();
+    setCharities(getCharity);
+  };
+  useEffect(() => {
+    getCharities();
+  }, [user]);
+
   return (
     <main className="flex flex-col items-center gap-12 w-full">
       <SEO
@@ -48,14 +62,18 @@ const Charity = () => {
         </div>
         <div className="flex flex-col items-center justify-center flex-wrap gap-4 w-full ">
           <div className="flex items-center gap-4 w-[95%] flex-wrap md:grid grid-cols-3  ">
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
-            <CharityCard clamp="3" width="375px" />
+            {charities &&
+              charities.map((charity) => (
+                <CharityCard
+                  key={charity?.id}
+                  title={charity.name}
+                  description={charity.description}
+                  date={charity.created_at}
+                  image={charity.image_url}
+                  clamp="3"
+                  width="375px"
+                />
+              ))}
           </div>
 
           {isCharity ? (

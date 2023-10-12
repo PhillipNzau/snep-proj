@@ -46,3 +46,35 @@ export const CREATE_CHARITY = async (charityData: {
     throw new Error("Creation failed");
   }
 };
+
+export const GET_CHARITY = async () => {
+  const storedUser = localStorage.getItem("user"); // Use localStorage directly
+
+  let token = "";
+
+  if (storedUser) {
+    const parsedUser = JSON.parse(storedUser);
+    token = parsedUser.token;
+  }
+
+  try {
+    // Send a POST request to the login API endpoint with user credentials
+    const response = await fetch(API_URLS.CHARITIES, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Getting charities failed");
+    }
+
+    const charityRes = await response.json();
+
+    return charityRes;
+  } catch (error) {
+    throw new Error("Getting charities failed");
+  }
+};
