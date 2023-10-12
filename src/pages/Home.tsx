@@ -104,6 +104,7 @@ const Home: React.FC = () => {
                   title={charity.name}
                   description={charity.description}
                   date={charity.created_at}
+                  status={charity.status}
                   image={charity.image_url}
                   clamp="3"
                   width="375px"

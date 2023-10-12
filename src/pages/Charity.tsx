@@ -70,6 +70,7 @@ const Charity: React.FC = () => {
                   description={charity.description}
                   date={charity.created_at}
                   image={charity.image_url}
+                  status={charity.status}
                   clamp="3"
                   width="375px"
                 />

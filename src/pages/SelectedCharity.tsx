@@ -83,12 +83,23 @@ const SelectedCharity = () => {
           </div>
         </div>
 
-        {(isAdmin || isCharity) && (
+        {isCharity ? (
           <DialogTrigger asChild>
             <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
               View Donors
             </button>
           </DialogTrigger>
+        ) : (
+          isAdmin && (
+            <div className="flex items-center gap-4">
+              <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+                Approve Charity
+              </button>
+              <button className="bg-rose-600 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-rose-500 transition-all duration-200">
+                Reject Charity
+              </button>
+            </div>
+          )
         )}
 
         {/* Beneficiary story */}

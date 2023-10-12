@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useUser } from "@/hooks/useUser";
 
 export interface Props {
   title?: string;
   description?: string;
   date?: string;
   image?: string;
+  status?: string;
   height?: string;
   width?: string;
   clamp?: string;
@@ -28,7 +30,11 @@ const CharityCard: React.FC<Props> = ({
   image,
   width,
   clamp,
+  status,
 }) => {
+  const { user } = useUser();
+
+  const isAdmin = user?.role == "admin";
   const navigate = useNavigate();
   const handleOnClick = (id: any) => {
     navigate(`/charity/${id}`, { state: { id } });
@@ -64,7 +70,23 @@ const CharityCard: React.FC<Props> = ({
 
         <div className="mt-8  flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
           <p>PROJECT UPDATE</p>
-          <p>{date && formatCreatedAt(date)}</p>
+          {isAdmin ? (
+            <p
+              className={`text-sm font-semibold ${
+                status === "pending"
+                  ? "text-purple-900"
+                  : status === "active"
+                  ? "text-green-500"
+                  : status === "rejected"
+                  ? "text-red-500"
+                  : ""
+              }`}
+            >
+              {status}
+            </p>
+          ) : (
+            <p>{date && formatCreatedAt(date)}</p>
+          )}
         </div>
       </div>
     </div>
