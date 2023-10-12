@@ -24,3 +24,18 @@ const CharityForm: React.FC<CharityFormProps> = ({ onSubmit }) => {
       charityAmountGoal: 0,
       charityImage: null,
     });
+
+    const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+    const handleInputChange = (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({ ...prevData, [name]: value }));
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files && e.target.files[0];
+      setFormData((prevData) => ({ ...prevData, charityImage: file }));
+    };
+
