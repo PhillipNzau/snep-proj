@@ -66,6 +66,7 @@ const Charity: React.FC = () => {
               charities.map((charity) => (
                 <CharityCard
                   key={charity?.id}
+                  id={charity.id}
                   title={charity.name}
                   description={charity.description}
                   date={charity.created_at}

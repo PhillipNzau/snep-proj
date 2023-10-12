@@ -3,8 +3,23 @@ import HoverCard from "../components/HoverCard";
 import { useUser } from "../hooks/useUser";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DonorModal } from "@/components/DonorModal";
+import { useEffect, useState } from "react";
+import { GET_CHARITY } from "@/services/charity";
+import { CharityModel } from "@/models/CharityModel";
+
+const formatCreatedAt = (createdAt: string): string => {
+  const date = new Date(createdAt);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+};
 
 const SelectedCharity = () => {
+  const [charities, setCharities] = useState<CharityModel | null>(null);
+
   const { user } = useUser();
   const isAdmin = user?.role == "admin";
   const isCharity = user?.role == "charity";
@@ -18,6 +33,15 @@ const SelectedCharity = () => {
   const toCreateStory = (id: any) => {
     navigate(`/charity/${id}/create-story`, { state: { id } });
   };
+
+  // fetch charities
+  const getCharities = async () => {
+    const getCharity = await GET_CHARITY(id);
+    setCharities(getCharity);
+  };
+  useEffect(() => {
+    getCharities();
+  }, [user]);
 
   return (
     <Dialog>
@@ -51,34 +75,28 @@ const SelectedCharity = () => {
         {/* Charity brief/about */}
         <div className="mb-12">
           <img
-            src="/mainCharity.png"
+            // src="/mainCharity.png"
+            src={charities?.image_url}
             alt="main charity"
             width={814}
             height={335}
             className="w-full mb-8"
           />
 
-          <p className="mb-6">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </p>
+          <p className="mb-6">{charities?.description}</p>
           <div className=" flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
             <p>PROJECT UPDATE</p>
             <div className="text-end">
               <p>
                 <span className="font-bold text-base font-poppins">
-                  KES 30,000
+                  KES {charities?.goal}
                 </span>{" "}
-                raised of KES 50,000 goal
+                raised of KES {charities?.goal}
               </p>
-              <p>20 SEP 2023</p>
+              <p>
+                {charities?.created_at &&
+                  formatCreatedAt(charities?.created_at)}
+              </p>
             </div>
           </div>
         </div>

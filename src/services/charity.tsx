@@ -21,7 +21,8 @@ export const CREATE_CHARITY = async (charityData: {
     charity: {
       ...charityData,
       user_id: user_id,
-      image_url: "https://unsplash.com/photos/noo4JwEDguA",
+      image_url:
+        "https://plus.unsplash.com/premium_photo-1681492071459-3a45f4289743?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
     },
   };
   try {
@@ -47,7 +48,7 @@ export const CREATE_CHARITY = async (charityData: {
   }
 };
 
-export const GET_CHARITY = async () => {
+export const GET_CHARITY = async (id?: string) => {
   const storedUser = localStorage.getItem("user"); // Use localStorage directly
 
   let token = "";
@@ -58,8 +59,13 @@ export const GET_CHARITY = async () => {
   }
 
   try {
+    let url = API_URLS.CHARITIES;
+    if (id) {
+      url = `${API_URLS.CHARITIES}/${id}`;
+    }
+
     // Send a POST request to the login API endpoint with user credentials
-    const response = await fetch(API_URLS.CHARITIES, {
+    const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

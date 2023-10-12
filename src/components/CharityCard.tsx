@@ -3,6 +3,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useUser } from "@/hooks/useUser";
 
 export interface Props {
+  id?: number;
   title?: string;
   description?: string;
   date?: string;
@@ -24,6 +25,7 @@ const formatCreatedAt = (createdAt: string): string => {
 };
 
 const CharityCard: React.FC<Props> = ({
+  id,
   title,
   description,
   date,
@@ -44,7 +46,7 @@ const CharityCard: React.FC<Props> = ({
     <div
       className={` mb-2 w-[${width}] h-full bg-white pb-36 border  border-zinc-300 overflow-hidden`}
       onClick={() => {
-        handleOnClick(1);
+        handleOnClick(id);
       }}
     >
       <div className="w-full h-[150px] overflow-hidden">
