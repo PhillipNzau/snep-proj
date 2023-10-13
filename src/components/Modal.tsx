@@ -2,20 +2,27 @@ import * as React from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog } from "@headlessui/react";
-import CharityCard, { Props } from "./CharityCard";
+import StoryCard, { Props } from "./StoryCard";
+
+export interface StoryProps {
+  id?: number;
+  title?: string;
+  description?: string;
+  date?: string;
+  image?: string;
+  width?: string;
+  clamp?: string;
+}
 
 type ModalProps = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  story: StoryProps;
 };
 
-export const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
-  const myComponentProps: Props = {
-    title: "My Title",
-    description: "My Description",
-    date: "2023-10-01",
-    image: "/charityImg.png",
-  };
+export const Modal = ({ isOpen, setIsOpen, story }: ModalProps) => {
+  const myComponentProps: Props = story;
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -73,7 +80,7 @@ export const Modal = ({ isOpen, setIsOpen }: ModalProps) => {
                 aria-modal="true"
                 aria-labelledby="modal-headline"
               >
-                <CharityCard {...myComponentProps} />
+                <StoryCard {...myComponentProps} />
               </div>
             </motion.div>
           </div>

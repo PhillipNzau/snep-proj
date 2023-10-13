@@ -6,6 +6,8 @@ import { DonorModal } from "@/components/DonorModal";
 import { useEffect, useState } from "react";
 import { GET_CHARITY } from "@/services/charity";
 import { CharityModel } from "@/models/CharityModel";
+import { GET_STORY } from "@/services/story";
+import { StoryModel } from "@/models/StoryModel";
 
 const formatCreatedAt = (createdAt: string): string => {
   const date = new Date(createdAt);
@@ -19,6 +21,7 @@ const formatCreatedAt = (createdAt: string): string => {
 
 const SelectedCharity = () => {
   const [charities, setCharities] = useState<CharityModel | null>(null);
+  const [stories, setStories] = useState<StoryModel[] | null>(null);
 
   const { user } = useUser();
   const isAdmin = user?.role == "admin";
@@ -39,8 +42,15 @@ const SelectedCharity = () => {
     const getCharity = await GET_CHARITY(id);
     setCharities(getCharity);
   };
+
+  // fetch charities
+  const getStories = async (id: string | undefined) => {
+    const getStory = await GET_STORY(id);
+    setStories(getStory);
+  };
   useEffect(() => {
     getCharities();
+    getStories(id);
   }, [user]);
 
   return (
@@ -129,12 +139,16 @@ const SelectedCharity = () => {
 
           <div className="flex flex-col items-center gap-14">
             <div className="flex items-center  gap-4 flex-wrap">
-              <HoverCard />
-              <HoverCard />
-              <HoverCard />
-              <HoverCard />
-              <HoverCard />
-              <HoverCard />
+              {stories &&
+                stories.map((story) => (
+                  <HoverCard
+                    key={story.id}
+                    title={story.name}
+                    description={story.description}
+                    image={story.image_url}
+                    date={story.created_at}
+                  />
+                ))}
             </div>
 
             {isAdmin && (

@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useUser } from "@/hooks/useUser";
 
 export interface Props {
-  id?: number;
   title?: string;
   description?: string;
   date?: string;
@@ -24,32 +21,19 @@ const formatCreatedAt = (createdAt: string): string => {
   return new Intl.DateTimeFormat("en-US", options).format(date);
 };
 
-const CharityCard: React.FC<Props> = ({
-  id,
+const StoryCard: React.FC<Props> = ({
   title,
   description,
   date,
   image,
   width,
   clamp,
-  status,
 }) => {
-  const { user } = useUser();
-
-  const isAdmin = user?.role == "admin";
-  const navigate = useNavigate();
-  const handleOnClick = (id: any) => {
-    navigate(`/charity/${id}`, { state: { id } });
-  };
-
   return (
     <div
-      className={` mb-2 w-[${width}] h-[350px] bg-white pb-36 border  border-zinc-300 overflow-hidden hover:cursor-pointer`}
-      onClick={() => {
-        handleOnClick(id);
-      }}
+      className={` mb-2 min-w-[300px] w-[${width}] h-auto bg-white pb-36 border  border-zinc-300 overflow-hidden hover:cursor-pointer`}
     >
-      <div className="w-full h-[150px] overflow-hidden">
+      <div className="w-full h-[250px] ">
         <LazyLoadImage
           // src="/charityImg.png"
           src={image}
@@ -72,27 +56,11 @@ const CharityCard: React.FC<Props> = ({
 
         <div className="mt-8  flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
           <p>PROJECT UPDATE</p>
-          {isAdmin ? (
-            <p
-              className={`text-sm font-semibold ${
-                status === "pending"
-                  ? "text-purple-900"
-                  : status === "active"
-                  ? "text-green-500"
-                  : status === "rejected"
-                  ? "text-red-500"
-                  : ""
-              }`}
-            >
-              {status}
-            </p>
-          ) : (
-            <p>{date && formatCreatedAt(date)}</p>
-          )}
+          <p>{date && formatCreatedAt(date)}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default CharityCard;
+export default StoryCard;
