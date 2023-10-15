@@ -36,7 +36,7 @@ const Charity: React.FC = () => {
       />
 
       {/* Hero section */}
-      <section className="relative w-[535px] mb-20">
+      <section className="relative md:w-[535px] mb-8 md:mb-20">
         <div className="">
           <LazyLoadImage
             src="/hero.png"
@@ -46,7 +46,7 @@ const Charity: React.FC = () => {
           />
         </div>
 
-        <div className="absolute -bottom-16 -right-20 w-[402px] h-48 bg-indigo-900 bg-opacity-60 px-6 py-7 text-white">
+        <div className="md:absolute -bottom-16 -right-20 md:w-[402px] h-48 bg-indigo-900 bg-opacity-60 px-6 py-7 text-white">
           <h1 className="text-4xl mb-5 ">Create Lasting Impact</h1>
           <p className="text-base ">
             Thanks to generous generation we keep kids in school
@@ -55,13 +55,13 @@ const Charity: React.FC = () => {
       </section>
 
       {/* View Charities */}
-      <section className="w-[64%] mx-auto">
+      <section className="md:w-[64%] mx-auto">
         <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-8 font-metrophobic">
           <p>CHARITIES</p>
-          <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
+          <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
         </div>
         <div className="flex flex-col items-center justify-center flex-wrap gap-4 w-full ">
-          <div className="flex items-center gap-4 w-[95%] flex-wrap md:grid grid-cols-3  ">
+          <div className="flex items-center px-4 md:px-0 gap-4 md:w-[95%] flex-wrap md:grid grid-cols-3  ">
             {charities &&
               charities.map((charity) => (
                 <CharityCard

@@ -17,7 +17,7 @@ const App: React.FC<{ children: ReactNode }> = ({ children }) => {
     <HelmetProvider>
       <AuthContext.Provider value={{ user, setUser }}>
         {/* Provide the user and setUser values */}
-        <div className="">
+        <div className="overflow-hidden">
           <div className="bg-[#281B7D] min-w-full min-h-6 h-6 w-full"></div>
           {!shouldHideNavbarAndFooter && <Navbar />}
           <div className=" py-16">{children}</div>

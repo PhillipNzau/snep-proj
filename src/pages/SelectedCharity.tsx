@@ -57,7 +57,7 @@ const SelectedCharity = () => {
     <Dialog>
       {/* back button */}
       <div
-        className="w-[64%] mx-auto py-4  flex justify-start items-center gap-4 transition-all duration-300 group  hover:cursor-pointer mb-8 text-zinc-500"
+        className="px-4 md:px-0 md:w-[64%] mx-auto py-4  flex justify-start items-center gap-4 transition-all duration-300 group  hover:cursor-pointer mb-8 text-zinc-500"
         onClick={() => navigate(-1)}
       >
         <svg
@@ -76,10 +76,10 @@ const SelectedCharity = () => {
         Back
       </div>
 
-      <div className="w-[64%] mx-auto ">
+      <div className="px-6 md:w-[64%] md:mx-auto ">
         <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
           <p>CHARITIES</p>
-          <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
+          <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
         </div>
 
         {/* Charity brief/about */}
@@ -132,13 +132,13 @@ const SelectedCharity = () => {
 
         {/* Beneficiary story */}
         <div>
-          <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
+          <div className="flex items-center  gap-4 mb-6 md:mb-10 text-zinc-400 self-start font-metrophobic">
             <p>Beneficiaries Stories</p>
-            <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
+            <div className="bg-zinc-300 h-[1px] w-32 md:w-[260px]"></div>
           </div>
 
           <div className="flex flex-col items-center gap-14">
-            <div className="flex items-center  gap-4 flex-wrap">
+            <div className="flex items-center gap-4 flex-wrap">
               {stories &&
                 stories.map((story) => (
                   <HoverCard

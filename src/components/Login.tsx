@@ -62,7 +62,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center mx-6 bg-purple-900 md:w-[562px] h-[530px] rounded-xl md:mx-auto">
+    <div className="flex justify-center items-center px-4 md:px-0 mx-4 bg-purple-900 md:w-[562px] h-[530px] rounded-xl md:mx-auto">
       <div className="w-[379px]">
         <img
           src="/footer-logo.png"
@@ -122,7 +122,7 @@ const Login: React.FC = () => {
               {/* Sign-up link */}
               <p className="text-white font-metrophobic">
                 Don't have an account?{" "}
-                <span className="hover:cursor-pointer">
+                <span className="hover:cursor-pointer underline underline-offset-4">
                   <Link to="/register">Sign-up</Link>
                 </span>
               </p>

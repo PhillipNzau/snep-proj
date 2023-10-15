@@ -85,11 +85,11 @@ const CreateStory: React.FC = () => {
   //   }
   // };
   return (
-    <div className="w-[64%] mx-auto ">
+    <div className="md:w-[64%] mx-auto px-4 md:px-0">
       {/* header */}
       <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
         <p>Create Story</p>
-        <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
+        <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
       </div>
 
       {/* story form */}
@@ -133,7 +133,7 @@ const CreateStory: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-14 bg-white border border-purple-900 text-purple-900 w-96 mx-auto h-14 rounded-lg font-metrophobic font-bold mb-3"
+                className="mt-8 md:mt-14 bg-white border border-purple-900 text-purple-900 w-full md:w-96 mx-auto h-14 rounded-lg font-metrophobic font-bold mb-3"
               >
                 Create Story
               </button>

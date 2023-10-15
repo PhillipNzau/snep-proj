@@ -17,11 +17,11 @@ const Navbar = () => {
     return location.pathname === path;
   };
   return (
-    <nav className="bg-white shadow-md shadow-violet-100 flex items-center justify-between px-12 py-2 ">
-      <div>
+    <nav className="bg-white shadow-md shadow-violet-100 md:flex items-center justify-between py-6  md:px-12 md:py-2 ">
+      <div className="px-4 mb-6 md:mb-0">
         <img src="/header-logo.png" alt="logo" width={117} height={46} />
       </div>
-      <div className="flex items-center gap-36">
+      <div className="flex items-center justify-center gap-10 md:gap-36">
         <ul className="flex items-center gap-10 ">
           <li className="hover:font-bold text-base w-20 transition-all duration-150 text-center hover:underline underline-offset-8">
             <Link

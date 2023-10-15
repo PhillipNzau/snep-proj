@@ -24,7 +24,7 @@ const HoverCard: React.FC<Props> = ({ title, description, date, image }) => {
     <>
       {/* hover card effect */}
       <div
-        className="relative flex items-center justify-center w-72 h-60 bg-gray-900 group hover:cursor-pointer"
+        className="relative flex items-center justify-center w-full md:w-72 h-60 bg-gray-900 group hover:cursor-pointer"
         onClick={() => {
           setIsOpen(!isOpen);
         }}
