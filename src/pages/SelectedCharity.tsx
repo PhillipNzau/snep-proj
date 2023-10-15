@@ -9,6 +9,7 @@ import { CharityModel } from "@/models/CharityModel";
 import { GET_STORY } from "@/services/story";
 import { StoryModel } from "@/models/StoryModel";
 import { CHANGE_STATUS } from "@/services/changeStatus";
+import { DELETE_CHARITY } from "@/services/deleteCharity";
 
 const formatCreatedAt = (createdAt: string): string => {
   const date = new Date(createdAt);
@@ -62,6 +63,17 @@ const SelectedCharity = () => {
     const changeStatus = await CHANGE_STATUS(data);
     return changeStatus;
   };
+
+  const onDeleteCharity = async () => {
+    const data = {
+      id: id,
+    };
+    const deleteCharity = await DELETE_CHARITY(data);
+    navigate(-1);
+
+    return deleteCharity;
+  };
+
   return (
     <Dialog>
       {/* back button */}
@@ -171,7 +183,12 @@ const SelectedCharity = () => {
             </div>
 
             {isAdmin && (
-              <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+              <button
+                className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+                onClick={() => {
+                  onDeleteCharity();
+                }}
+              >
                 Delete Charity
               </button>
             )}
