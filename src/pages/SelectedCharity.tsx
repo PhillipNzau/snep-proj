@@ -8,6 +8,7 @@ import { GET_CHARITY } from "@/services/charity";
 import { CharityModel } from "@/models/CharityModel";
 import { GET_STORY } from "@/services/story";
 import { StoryModel } from "@/models/StoryModel";
+import { CHANGE_STATUS } from "@/services/changeStatus";
 
 const formatCreatedAt = (createdAt: string): string => {
   const date = new Date(createdAt);
@@ -53,6 +54,14 @@ const SelectedCharity = () => {
     getStories(id);
   }, [user]);
 
+  const changeCharityStatus = async (status: string) => {
+    const data = {
+      status: status,
+      charity_id: id,
+    };
+    const changeStatus = await CHANGE_STATUS(data);
+    return changeStatus;
+  };
   return (
     <Dialog>
       {/* back button */}
@@ -120,10 +129,20 @@ const SelectedCharity = () => {
         ) : (
           isAdmin && (
             <div className="flex items-center gap-4">
-              <button className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+              <button
+                className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+                onClick={() => {
+                  changeCharityStatus("active");
+                }}
+              >
                 Approve Charity
               </button>
-              <button className="bg-rose-600 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-rose-500 transition-all duration-200">
+              <button
+                className="bg-rose-600 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-rose-500 transition-all duration-200"
+                onClick={() => {
+                  changeCharityStatus("reject");
+                }}
+              >
                 Reject Charity
               </button>
             </div>
