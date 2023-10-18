@@ -61,6 +61,7 @@ const SelectedCharity = () => {
       charity_id: id,
     };
     const changeStatus = await CHANGE_STATUS(data);
+    navigate(`/charity`);
     return changeStatus;
   };
 
@@ -99,7 +100,7 @@ const SelectedCharity = () => {
 
       <div className="px-6 md:w-[64%] md:mx-auto ">
         <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
-          <p>CHARITIES</p>
+          <p>{charities && charities.name}</p>
           <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
         </div>
 
@@ -114,7 +115,9 @@ const SelectedCharity = () => {
             className="w-full mb-8"
           />
 
-          <p className="mb-6">{charities?.description}</p>
+          <p className="mb-6 text-sm font-metrophobic">
+            {charities?.description}
+          </p>
           <div className=" flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
             <p>PROJECT UPDATE</p>
             <div className="text-end">
@@ -139,26 +142,26 @@ const SelectedCharity = () => {
             </button>
           </DialogTrigger>
         ) : (
-          isAdmin && (
-            <div className="flex items-center gap-4">
-              <button
-                className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
-                onClick={() => {
-                  changeCharityStatus("active");
-                }}
-              >
-                Approve Charity
-              </button>
-              <button
-                className="bg-rose-600 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-rose-500 transition-all duration-200"
-                onClick={() => {
-                  changeCharityStatus("reject");
-                }}
-              >
-                Reject Charity
-              </button>
-            </div>
-          )
+          isAdmin &&
+          (charities?.status == "active" ? (
+            <button
+              className="bg-rose-600 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-rose-500 transition-all duration-200"
+              onClick={() => {
+                changeCharityStatus("reject");
+              }}
+            >
+              Reject Charity
+            </button>
+          ) : (
+            <button
+              className="bg-purple-900 w-[182px] h-11 mx-auto my-10 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"
+              onClick={() => {
+                changeCharityStatus("active");
+              }}
+            >
+              Approve Charity
+            </button>
+          ))
         )}
 
         {/* Beneficiary story */}
@@ -202,6 +205,8 @@ const SelectedCharity = () => {
               >
                 Create Story
               </button>
+            ) : isAdmin ? (
+              ""
             ) : (
               <button
                 className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200"

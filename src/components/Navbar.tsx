@@ -1,4 +1,4 @@
-import { Link, useLocation, useMatch } from "react-router-dom";
+import { Link, useLocation, useMatch, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useUser } from "../hooks/useUser";
 
@@ -7,10 +7,12 @@ const Navbar = () => {
   const isCharityRoute = useMatch("/charity*");
   const { logout } = useAuth();
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     // Simulate a logout action
     logout();
+    navigate(`/home`);
   };
 
   const isActive = (path: string) => {
@@ -65,11 +67,11 @@ const Navbar = () => {
             Logout
           </button>
         ) : (
-          <button className="w-24 h-[25px] bg-purple-900 text-white text-base hover:bg-purple-800 transition-all duration-200 font-metrophobic">
-            <Link to="/login" className="font-metrophobic">
+          <Link to="/login" className="font-metrophobic">
+            <button className="w-24 h-[25px] bg-purple-900 text-white text-base hover:bg-purple-800 transition-all duration-200 font-metrophobic">
               Login
-            </Link>
-          </button>
+            </button>
+          </Link>
         )}
       </div>
     </nav>

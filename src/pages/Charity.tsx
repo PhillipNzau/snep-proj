@@ -56,8 +56,8 @@ const Charity: React.FC = () => {
 
       {/* View Charities */}
       <section className="md:w-[64%] mx-auto">
-        <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-8 font-metrophobic">
-          <p>CHARITIES</p>
+        <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-6 font-metrophobic">
+          <p>Charities & Organizations</p>
           <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
         </div>
         <div className="flex flex-col items-center justify-center flex-wrap gap-4 w-full ">
@@ -88,9 +88,10 @@ const Charity: React.FC = () => {
               Add Charity
             </button>
           ) : (
-            <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
-              View More
-            </button>
+            ""
+            // <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+            //   View More
+            // </button>
           )}
         </div>
       </section>

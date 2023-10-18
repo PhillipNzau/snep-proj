@@ -12,6 +12,9 @@ const Home: React.FC = () => {
   const [charities, setCharities] = useState<CharityModel[] | null>(null);
   const { user } = useUser();
 
+  const isAdmin = user?.role == "admin";
+  const isCharity = user?.role == "charity";
+
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const toCreateCharity = (id: any) => {
@@ -53,48 +56,56 @@ const Home: React.FC = () => {
       </section>
 
       {/* About us Section */}
-      <section className="md:w-[64%] mx-auto text-zinc-400 self-start px-8">
+      <section className="md:w-[64%] mx-auto text-zinc-400 self-start px-6">
         <div className="flex items-center gap-4 mb-8 font-metrophobic">
-          <p>OVERVIEW</p>
+          <p>Trust & Safety</p>
           <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
         </div>
 
         <div className="md:flex items-start justify-between text-black space-y-8 md:space-y-0">
-          <p className=" text-2xl font-bold">Some fancy title</p>
+          <p className=" text-2xl font-bold">We have your back</p>
 
           <p className="w-80 text-base">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            With a global team dedicated to trust and safety, we’ve successfully
+            managed fundraisers worldwide for more than a decade. Don’t worry
+            about a thing, we’ve got you covered.
           </p>
         </div>
       </section>
 
       {/* CTA banner */}
-      <section className="bg-purple-900 w-full md:h-64 px-4 py-4 space-y-6 md:space-y-0 md:py-0 md:px-[20%] md:flex items-center justify-between font-metrophobic">
-        <p className="md:w-[426px] text-white text-4xl md:text-6xl ">
-          BECOME A CHARITY TODAY
-        </p>
-        <button
-          className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200"
-          onClick={() => {
-            toCreateCharity(id);
-          }}
-        >
-          BE A CHARITY
-        </button>
-      </section>
+      {!isAdmin &&
+        (isCharity ? (
+          <section className="bg-purple-900 w-full md:h-72 px-4 py-4 space-y-6 md:space-y-0 md:py-0 md:px-[20%] md:flex items-center justify-between font-metrophobic">
+            <p className="md:w-[426px] text-white text-4xl md:text-6xl uppercase">
+              Thank you for making a difference in the world!
+            </p>
+            <button
+              className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200 uppercase"
+              onClick={() => {
+                toCreateCharity(id);
+              }}
+            >
+              Create A CHARITY
+            </button>
+          </section>
+        ) : (
+          <section className="bg-purple-900 w-full md:h-72 px-4 py-4 space-y-6 md:space-y-0 md:py-0 md:px-[20%] md:flex items-center justify-between font-metrophobic">
+            <p className="md:w-[426px] text-white text-4xl md:text-6xl uppercase">
+              Ready to get started? Join thousands of others today.
+            </p>
+            <Link to="/register" className="font-metrophobic uppercase">
+              <button className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200">
+                become a charity
+              </button>
+            </Link>
+          </section>
+        ))}
 
       {/* View Charities */}
       <section className="md:w-[64%] mx-auto">
-        <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-8 font-metrophobic">
-          <p>CHARITIES</p>
+        <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start px-6 font-metrophobic">
+          <p>Charities & Organizations</p>
           <div className="bg-zinc-300 h-[1px] w-52 md:w-[260px]"></div>
         </div>
         <div className="flex flex-col items-center justify-center flex-wrap gap-4 w-full ">
@@ -115,9 +126,11 @@ const Home: React.FC = () => {
               ))}
           </div>
 
-          <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
-            <Link to="/charity">View More</Link>
-          </button>
+          <Link to="/charity">
+            <button className="bg-purple-900 w-[182px] h-11 flex items-center justify-center text-white font-metrophobic hover:bg-purple-800 transition-all duration-200">
+              View More
+            </button>
+          </Link>
         </div>
       </section>
     </main>

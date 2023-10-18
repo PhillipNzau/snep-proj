@@ -156,8 +156,6 @@ const SignUp: React.FC = () => {
                 name="role"
                 className="bg-transparent outline-none border border-white p-2 rounded-lg text-white font-metrophobic w-full h-14"
               >
-                <option value="admin">Admin</option>
-
                 <option value="charity">Charity</option>
 
                 <option value="regular">Regular</option>
@@ -171,7 +169,7 @@ const SignUp: React.FC = () => {
                   isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                {isSubmitting ? "Signing up..." : "Singup"}
+                {isSubmitting ? "Signing up..." : "Signup"}
               </button>
 
               {/* Display error message if there is one */}

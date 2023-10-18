@@ -56,6 +56,8 @@ const DonateToCharity: React.FC = () => {
     values: { interval: string; amount: string; anonymous: string },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
+    navigate("https://donate.stripe.com/test_14k9CFcui85Y9uo8ww");
+
     try {
       console.log("valies", values);
 
@@ -68,7 +70,7 @@ const DonateToCharity: React.FC = () => {
       console.log("donte data res", donateData);
 
       // Redirect to a specific route upon successful login
-      navigate("/");
+      navigate("https://donate.stripe.com/test_14k9CFcui85Y9uo8ww");
       // Clear any previous error messages
       setError(null);
     } catch (error) {
@@ -83,10 +85,10 @@ const DonateToCharity: React.FC = () => {
   }
 
   return (
-    <section className="w-[64%] mx-auto mb-24">
+    <section className="mx-4 md:w-[64%] md:mx-auto mb-24">
       <div className="flex items-center gap-4 mb-10 text-zinc-400 self-start font-metrophobic">
         <p>Donating to Charity name</p>
-        <div className="bg-zinc-300 h-[1px] w-[260px]"></div>
+        <div className="bg-zinc-300 h-[1px] w-20 md:w-[260px]"></div>
       </div>
 
       {/* donation form */}
@@ -192,15 +194,17 @@ const DonateToCharity: React.FC = () => {
                 </svg>
               </div>
               {/* Submit button */}
-              <button
+              <a
+                href="https://donate.stripe.com/test_14k9CFcui85Y9uo8ww"
+                target="_blank"
                 type="submit"
-                disabled={isSubmitting}
+                // onClick={handleThis}
                 className={`mt-12 text-white bg-slate-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3 ${
                   isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
                 {isSubmitting ? "Processing..." : "Donate"}
-              </button>
+              </a>
 
               {/* Display error message if there is one */}
               {error && <p className="text-red-500">{error}</p>}
