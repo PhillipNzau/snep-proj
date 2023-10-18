@@ -1,3 +1,4 @@
+import { EditedCharityModel } from "@/pages/SelectedCharity";
 import { API_URLS } from "../config/api";
 
 async function performCreateCharity(
@@ -71,6 +72,47 @@ async function performGetCharity(
   }
 }
 
+async function performUpdateCharity(
+  charityData: EditedCharityModel,
+  token: string,
+  charity_id?: string
+): Promise<any> {
+  const storedUser = localStorage.getItem("user");
+  let user_id = 0;
+
+  if (storedUser) {
+    const parsedUser = JSON.parse(storedUser);
+    user_id = parseInt(parsedUser.id, 10);
+  }
+
+  const data = {
+    charity: {
+      ...charityData,
+      user_id: user_id,
+    },
+  };
+
+  try {
+    const response = await fetch(`${API_URLS.CHARITIES}/${charity_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Charity update failed");
+    }
+
+    const charityRes = await response.json();
+    return charityRes;
+  } catch (error) {
+    throw new Error(`Update failed: ${error}`);
+  }
+}
+
 export const CREATE_CHARITY = async (charityData: {
   name: string;
   description: string;
@@ -85,6 +127,21 @@ export const CREATE_CHARITY = async (charityData: {
   }
 
   return performCreateCharity(charityData, token);
+};
+
+export const UPDATE_CHARITY = async (
+  charityData: EditedCharityModel,
+  charity_id?: string
+): Promise<any> => {
+  const storedUser = localStorage.getItem("user");
+  let token = "";
+
+  if (storedUser) {
+    const parsedUser = JSON.parse(storedUser);
+    token = parsedUser.token;
+  }
+
+  return performUpdateCharity(charityData, token, charity_id);
 };
 
 export const GET_CHARITY = async (id?: string): Promise<any> => {
