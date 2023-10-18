@@ -77,7 +77,7 @@ const Home: React.FC = () => {
       {!isAdmin &&
         (isCharity ? (
           <section className="bg-purple-900 w-full md:h-72 px-4 py-4 space-y-6 md:space-y-0 md:py-0 md:px-[20%] md:flex items-center justify-between font-metrophobic">
-            <p className="md:w-[426px] text-white text-4xl md:text-6xl uppercase">
+            <p className="md:w-[426px] text-white text-4xl md:text-5xl uppercase">
               Thank you for making a difference in the world!
             </p>
             <button
@@ -91,7 +91,7 @@ const Home: React.FC = () => {
           </section>
         ) : (
           <section className="bg-purple-900 w-full md:h-72 px-4 py-4 space-y-6 md:space-y-0 md:py-0 md:px-[20%] md:flex items-center justify-between font-metrophobic">
-            <p className="md:w-[426px] text-white text-4xl md:text-6xl uppercase">
+            <p className="md:w-[426px] text-white text-4xl md:text-5xl uppercase">
               Ready to get started? Join thousands of others today.
             </p>
             <Link to="/register" className="font-metrophobic uppercase">
