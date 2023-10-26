@@ -262,7 +262,7 @@ const SelectedCharity = () => {
               <div className="text-end">
                 <p>
                   <span className="font-bold text-base font-poppins">
-                    KES {charities?.goal}
+                    KES 200
                   </span>{" "}
                   raised of KES {charities?.goal}
                 </p>

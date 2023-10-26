@@ -71,7 +71,7 @@ const CharityCard: React.FC<Props> = ({
         </div>
 
         <div className="mt-8  flex items-center justify-between text-xs text-zinc-500 font-metrophobic">
-          <p>PROJECT UPDATE</p>
+          <p>CHARITY UPDATE</p>
           {isAdmin ? (
             <p
               className={`text-sm font-semibold ${

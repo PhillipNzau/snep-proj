@@ -23,7 +23,8 @@ const Home: React.FC = () => {
   // fetch charities
   const getCharities = async () => {
     const getCharity = await GET_CHARITY();
-    setCharities(getCharity);
+    const reversedCharities = getCharity.reverse();
+    setCharities(reversedCharities);
   };
   useEffect(() => {
     getCharities();
@@ -96,7 +97,7 @@ const Home: React.FC = () => {
             </p>
             <Link to="/register" className="font-metrophobic uppercase">
               <button className="bg-transparent border border-white w-[182px] h-11 flex items-center justify-center text-white hover:bg-white hover:text-purple-900 transition-all duration-200">
-                become a charity
+                Become a charity
               </button>
             </Link>
           </section>

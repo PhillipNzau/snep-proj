@@ -1,5 +1,5 @@
 import { useUser } from "../hooks/useUser";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
@@ -7,6 +7,8 @@ import { DONATE } from "../services/donate";
 
 const DonateToCharity: React.FC = () => {
   const { user } = useUser();
+  const { id } = useParams<{ id: string }>();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,24 +22,20 @@ const DonateToCharity: React.FC = () => {
 
   // Define the initial form values
   const initialValues = {
-    interval: "",
+    user_id: "",
     amount: "",
-    anonymous: "",
+    is_anonymous: false,
+    charity_id: "",
   };
 
   // Define a function to validate form input fields
-  const validate = (values: {
-    interval: string;
-    amount: string;
-    anonymous: string;
-  }) => {
-    const errors: { interval?: string; amount?: string; anonymous?: string } =
-      {};
+  const validate = (values: { amount: string; is_anonymous: boolean }) => {
+    const errors: { amount?: string; is_anonymous?: string } = {};
 
     // Validate the interval field
-    if (!values.interval) {
-      errors.interval = "interval Required";
-    }
+    // if (!values.interval) {
+    //   errors.interval = "interval Required";
+    // }
 
     // Validate the amount field
     if (!values.amount) {
@@ -45,43 +43,48 @@ const DonateToCharity: React.FC = () => {
     }
 
     // Validate the anonymous field
-    if (!values.anonymous) {
-      errors.anonymous = "anonymous Required";
+    if (!values.is_anonymous) {
+      errors.is_anonymous = "anonymous Required";
     }
     return errors;
   };
 
   // Define the form submission handler
   const onSubmit = async (
-    values: { interval: string; amount: string; anonymous: string },
+    values: { amount: string; is_anonymous: boolean },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
-    navigate("https://donate.stripe.com/test_14k9CFcui85Y9uo8ww");
+    // navigate("https://donate.stripe.com/test_14k9CFcui85Y9uo8ww");
 
     try {
-      console.log("valies", values);
-
       // Call the login function to authenticate the user
-      const donateData = await DONATE(values);
+
+      const donateValues = {
+        ...values,
+        charity_id: id,
+        user_id: user!.id,
+      };
+      console.log("well", donateValues);
+
+      const donateData = await DONATE(donateValues);
+
       // Disable the submit button to prevent multiple submissions
       setSubmitting(false);
       // Add the authenticated user to the user context
 
-      console.log("donte data res", donateData);
-
-      // Redirect to a specific route upon successful login
-      navigate("https://donate.stripe.com/test_14k9CFcui85Y9uo8ww");
       // Clear any previous error messages
       setError(null);
+      navigate("/");
+      return donateData;
     } catch (error) {
       // Handle login failure by displaying an error message
-      setError("Login failed. Please check your credentials.");
+      setError("Donation failed");
     }
   };
 
   // check if user is logged in
   if (!user) {
-    return null; // You can return null or a loading indicator here
+    return null;
   }
 
   return (
@@ -109,9 +112,9 @@ const DonateToCharity: React.FC = () => {
                 <div className="inline-block radio w-full">
                   <Field
                     type="radio"
-                    name="picked"
+                    name="is_anonymous"
                     id="A1"
-                    value="A"
+                    value="true"
                     checked
                     hidden="hidden"
                   />
@@ -119,15 +122,15 @@ const DonateToCharity: React.FC = () => {
                     htmlFor="A1"
                     className="px-2 py-1 h-14 rounded-lg flex justify-center items-center text-base w-full"
                   >
-                    Give Once
+                    Give Named
                   </label>
                 </div>
                 <div className="inline-block radio w-full">
                   <Field
                     type="radio"
-                    name="picked"
+                    name="is_anonymous"
                     id="B1"
-                    value="B"
+                    value="false"
                     hidden="hidden"
                     className="w-1/2"
                   />
@@ -135,7 +138,7 @@ const DonateToCharity: React.FC = () => {
                     htmlFor="B1"
                     className="px-2 py-1 h-14 rounded-lg flex justify-center items-center text-base  w-full "
                   >
-                    Give Monthly
+                    Give Anonymously
                   </label>
                 </div>
               </div>
@@ -164,11 +167,11 @@ const DonateToCharity: React.FC = () => {
                 />
                 Donate Anonymously
               </label> */}
-              <div className="flex gap-2 text-white">
+              {/* <div className="flex gap-2 text-white">
                 <Field
                   id="some_id"
                   type="checkbox"
-                  name="toggle"
+                  name="is_anonymous"
                   className="  relative peer shrink-0
                   appearance-none w-4 h-4 border-2 border-purple-500 rounded-sm bg-white
                   mt-1
@@ -192,9 +195,19 @@ const DonateToCharity: React.FC = () => {
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-              </div>
+              </div> */}
               {/* Submit button */}
-              <a
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                // onClick={handleThis}
+                className={`mt-12 text-white bg-slate-900 w-full h-14 rounded-lg font-metrophobic font-bold mb-3 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                {isSubmitting ? "Processing..." : "Donate"}
+              </button>
+              {/* <a
                 href="https://donate.stripe.com/test_14k9CFcui85Y9uo8ww"
                 target="_blank"
                 type="submit"
@@ -204,7 +217,7 @@ const DonateToCharity: React.FC = () => {
                 }`}
               >
                 {isSubmitting ? "Processing..." : "Donate"}
-              </a>
+              </a> */}
 
               {/* Display error message if there is one */}
               {error && <p className="text-red-500">{error}</p>}
