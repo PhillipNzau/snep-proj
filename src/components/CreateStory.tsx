@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useUser } from "../hooks/useUser";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ImageUpload from "./ImageUpload";
 import { CREATE_STORY } from "@/services/story";
 
 const CreateStory: React.FC = () => {
@@ -22,19 +21,19 @@ const CreateStory: React.FC = () => {
   const initialValues = {
     name: "",
     description: "",
-    // image_url: "",
+    image_url: "",
     // image: null as File | null,
   };
 
   const validate = (values: {
     name: string;
     description: string;
-    // image_url: string;
+    image_url: string;
   }) => {
     const errors: {
       name?: string;
       description?: string;
-      // image_url?: string;
+      image_url?: string;
     } = {};
 
     if (!values.name) {
@@ -44,6 +43,9 @@ const CreateStory: React.FC = () => {
     if (!values.description) {
       errors.description = "Description Required";
     }
+    if (!values.image_url) {
+      errors.image_url = "Image is Required";
+    }
 
     return errors;
   };
@@ -52,6 +54,7 @@ const CreateStory: React.FC = () => {
     values: {
       name: string;
       description: string;
+      image_url: string;
     },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
@@ -126,7 +129,20 @@ const CreateStory: React.FC = () => {
                 className="text-rose-600"
               />
 
-              <ImageUpload field="image" />
+              <div className="w-full">
+                <Field
+                  type="text"
+                  name="image_url"
+                  placeholder="Charity Image Url"
+                  className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
+                />
+                <ErrorMessage
+                  name="image_url"
+                  component="div"
+                  className="text-rose-600"
+                />
+              </div>
+              {/* <ImageUpload field="image" /> */}
               {/* <Field type="file" name="image" id="image" accept="image/*" />
               <ErrorMessage name="image" component="div" className="error" /> */}
 

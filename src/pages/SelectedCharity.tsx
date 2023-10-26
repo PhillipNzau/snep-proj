@@ -251,7 +251,7 @@ const SelectedCharity = () => {
               alt="main charity"
               width={814}
               height={335}
-              className="w-full mb-8"
+              className="w-full h-96 mb-8 object-fill"
             />
 
             <p className="mb-6 text-sm font-metrophobic">

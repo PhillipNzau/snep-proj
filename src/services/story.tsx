@@ -4,6 +4,7 @@ import { API_URLS } from "../config/api";
 export const CREATE_STORY = async (storyData: {
   name: string;
   description: string;
+  image_url: string;
   charity_id?: string;
 }) => {
   const storedUser = localStorage.getItem("user"); // Use localStorage directly
@@ -19,8 +20,8 @@ export const CREATE_STORY = async (storyData: {
 
   const data = {
     ...storyData,
-    image_url:
-      "https://images.unsplash.com/photo-1550751187-da63f7e2b4eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80",
+    // image_url:
+    //   "https://images.unsplash.com/photo-1550751187-da63f7e2b4eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80",
   };
   // console.log("story", data);
 

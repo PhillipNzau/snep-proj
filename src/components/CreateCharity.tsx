@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useUser } from "../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ImageUpload from "./ImageUpload";
 import { CREATE_CHARITY } from "@/services/charity";
 
 const CreateCharity: React.FC = () => {
@@ -21,7 +20,7 @@ const CreateCharity: React.FC = () => {
     name: "",
     description: "",
     goal: "",
-    // image_url: "",
+    image_url: "",
     // image: null as File | null,
   };
 
@@ -57,6 +56,7 @@ const CreateCharity: React.FC = () => {
       name: string;
       description: string;
       goal: string;
+      image_url: string;
     },
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
@@ -155,7 +155,20 @@ const CreateCharity: React.FC = () => {
                 className="text-rose-600"
               />
 
-              <ImageUpload field="image" />
+              <div className="w-full">
+                <Field
+                  type="text"
+                  name="image_url"
+                  placeholder="Charity Image Url"
+                  className="bg-transparent outline-none border border-purple-900  p-2 rounded-lg text-purple-900 font-metrophobic w-full h-14 placeholder:text-purple-900"
+                />
+                <ErrorMessage
+                  name="image_url"
+                  component="div"
+                  className="text-rose-600"
+                />
+              </div>
+              {/* <ImageUpload field="image" /> */}
               {/* <Field type="file" name="image" id="image" accept="image/*" />
               <ErrorMessage name="image" component="div" className="error" /> */}
 

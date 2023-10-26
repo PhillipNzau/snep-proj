@@ -24,6 +24,7 @@ const Home: React.FC = () => {
   const getCharities = async () => {
     const getCharity = await GET_CHARITY();
     const reversedCharities = getCharity.reverse();
+
     setCharities(reversedCharities);
   };
   useEffect(() => {

@@ -16,7 +16,6 @@ export const DONATE = async (donationData: {
     token = parsedUser.token;
     // charity_id = parseInt(parsedUser.id, 10);
   }
-  console.log("well", donationData);
 
   try {
     // Send a POST request to the donation API endpoint with user credentials
