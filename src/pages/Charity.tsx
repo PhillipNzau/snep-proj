@@ -21,7 +21,9 @@ const Charity: React.FC = () => {
   // fetch charities
   const getCharities = async () => {
     const getCharity = await GET_CHARITY();
-    setCharities(getCharity);
+    const reversedCharities = getCharity.reverse();
+
+    setCharities(reversedCharities);
   };
   useEffect(() => {
     getCharities();

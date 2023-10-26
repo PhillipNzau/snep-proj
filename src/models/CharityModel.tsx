@@ -6,5 +6,6 @@ export interface CharityModel {
   image_url: string;
   status: string;
   user_id: number;
+  total_donated: string;
   created_at: string;
 }

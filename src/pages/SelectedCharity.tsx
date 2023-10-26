@@ -6,10 +6,11 @@ import { DonorModal } from "@/components/DonorModal";
 import { useEffect, useState } from "react";
 import { GET_CHARITY, UPDATE_CHARITY } from "@/services/charity";
 import { CharityModel } from "@/models/CharityModel";
-import { GET_STORY } from "@/services/story";
+import { GET_DONOR, GET_STORY } from "@/services/story";
 import { StoryModel } from "@/models/StoryModel";
 import { CHANGE_STATUS } from "@/services/changeStatus";
 import { DELETE_CHARITY } from "@/services/deleteCharity";
+import { DonorModel } from "@/models/DonorModel";
 
 const formatCreatedAt = (createdAt: string): string => {
   const date = new Date(createdAt);
@@ -31,6 +32,7 @@ export interface EditedCharityModel {
 const SelectedCharity = () => {
   const [charities, setCharities] = useState<CharityModel | null>(null);
   const [stories, setStories] = useState<StoryModel[] | null>(null);
+  const [donors, setDonors] = useState<DonorModel[] | null>(null);
 
   const { user } = useUser();
   const isAdmin = user?.role == "admin";
@@ -64,6 +66,13 @@ const SelectedCharity = () => {
     setStories(getStory);
   };
 
+  // fetch donor list
+  const getDonors = async (id: string | undefined) => {
+    const getDonor = await GET_DONOR(id);
+    setDonors(getDonor);
+    console.log("donor", donors);
+  };
+
   // update charity
   const updateCharity = async (data: EditedCharityModel) => {
     const updateCharity = await UPDATE_CHARITY(data, id);
@@ -74,6 +83,7 @@ const SelectedCharity = () => {
   useEffect(() => {
     getCharities();
     getStories(id);
+    getDonors(id);
   }, [user]);
 
   const changeCharityStatus = async (status: string) => {
@@ -262,7 +272,7 @@ const SelectedCharity = () => {
               <div className="text-end">
                 <p>
                   <span className="font-bold text-base font-poppins">
-                    KES 200
+                    KES {charities?.total_donated}
                   </span>{" "}
                   raised of KES {charities?.goal}
                 </p>
@@ -333,7 +343,7 @@ const SelectedCharity = () => {
       </div>
 
       <DialogContent className="sm:max-w-[800px]">
-        <DonorModal />
+        <DonorModal donors={donors} />
       </DialogContent>
     </Dialog>
   );

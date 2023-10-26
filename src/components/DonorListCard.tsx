@@ -1,6 +1,20 @@
-const DonorListCard = () => {
+import { DonorModel } from "@/models/DonorModel";
+const formatCreatedAt = (createdAt: string): string => {
+  const date = new Date(createdAt);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  };
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+};
+interface DonorListCardProps {
+  donors: DonorModel | null;
+}
+
+const DonorListCard: React.FC<DonorListCardProps> = ({ donors }) => {
   return (
-    <div className="flex items-center justify-between gap-4 md:gap-0 bg-purple-900 bg-opacity-40 w-full px-5 py-2 rounded-md">
+    <div className="flex items-center justify-between gap-4 md:gap-0 bg-purple-900 bg-opacity-40 w-full px-5 py-2 rounded-md ">
       <img
         src="/charityImg.png"
         alt="avatar"
@@ -8,13 +22,13 @@ const DonorListCard = () => {
       />
 
       <p className="text-purple-900 font-poppins text-sm md:text-base">
-        Anonymous Donors
+        {donors?.user_names}
       </p>
       <p className="text-purple-900 font-poppins text-sm md:text-base">
-        Ksh 5,000
+        Ksh {donors?.amount}
       </p>
       <p className="font-metrophobic text-gray-600 text-xs md:text-sm">
-        20 Sep 2023
+        {donors?.created_at && formatCreatedAt(donors?.created_at)}
       </p>
     </div>
   );

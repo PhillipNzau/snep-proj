@@ -77,3 +77,30 @@ export const GET_STORY = async (charity_id: string | undefined) => {
     throw new Error("Creation failed");
   }
 };
+
+export const GET_DONOR = async (charity_id: string | undefined) => {
+  // console.log("story", data);
+
+  try {
+    // Send a POST request to the login API endpoint with user credentials
+    const response = await fetch(
+      `${API_URLS.CHARITIES}/${charity_id}/donations`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Charity creation failed");
+    }
+
+    const storyRes = await response.json();
+
+    return storyRes;
+  } catch (error) {
+    throw new Error("Creation failed");
+  }
+};
